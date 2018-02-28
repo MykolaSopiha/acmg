@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('id')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -25,6 +25,14 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->fill($request->toArray());
+        $user->save();
+        return back()->with(['success' => 'User updated!']);
     }
 
     public function attachAdminRole($user_id)

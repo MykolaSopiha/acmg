@@ -1,4 +1,4 @@
-@extends('cabinet.layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
@@ -66,7 +66,7 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-support"></i>
                     </div>
-                    <div class="mr-5">{{$payment}} Payments</div>
+                    <div class="mr-5">{{$payments}} Payments</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                     <span class="float-left">View Details</span>

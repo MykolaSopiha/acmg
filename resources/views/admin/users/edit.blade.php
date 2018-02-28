@@ -1,4 +1,4 @@
-@extends('cabinet.layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
@@ -17,7 +17,7 @@
     </ol>
     <!-- Breadcrumbs end -->
 
-    <form action="{{route('cabinet:user.update')}}" method="post" class="form">
+    <form action="{{route('admin:users.update', $user->id)}}" method="post" class="form">
 
         {!! csrf_field() !!}
 

@@ -21,10 +21,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
 
     Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 
+    Route::get('profile', ['uses' => 'UserController@index', 'as' => 'user.view']);
+    Route::post('profile', ['uses' => 'UserController@update', 'as' => 'user.update']);
+
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/', ['uses' => 'UsersController@index', 'as' => 'index']);
         Route::get('/{id}', ['uses' => 'UsersController@view', 'as' => 'view']);
         Route::get('/{id}/edit', ['uses' => 'UsersController@edit', 'as' => 'edit']);
+        Route::post('/{id}/update', ['uses' => 'UsersController@update', 'as' => 'update']);
         Route::get('/{id}/admin', ['uses' => 'UsersController@attachAdminRole', 'as' => 'attachAdmin']);
         Route::get('/{id}/user', ['uses' => 'UsersController@detachAdminRole', 'as' => 'detachAdmin']);
         Route::get('/{id}/delete', ['uses' => 'UsersController@delete', 'as' => 'delete']);
@@ -72,7 +76,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
 
 });
 
-Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth', 'role:user']], function () {
 
     Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 

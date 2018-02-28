@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name', // nickname
         'full_name',
         'email',
+        'country_id',
         'password',
         'skype',
         'phone',

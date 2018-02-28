@@ -26,6 +26,10 @@ $.fn.select2.defaults.set( "theme", "bootstrap4" );
 
 $(document).ready(function () {
 
-    $('.js-select').select2();
+    $('.js-select').each(function (index, element) {
+        $(element).select2({
+            placeholder: $(element).data('placeholder')
+        });
+    });
 
 });

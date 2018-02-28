@@ -13,7 +13,15 @@ class CreateSessionsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('account_id');
+            $table->integer('manager_id');
+            $table->dateTime('session_start');
+            $table->dateTime('session_end');
+            $table->text('comment');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sessions');
     }
 }

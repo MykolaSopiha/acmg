@@ -11365,7 +11365,7 @@ window.Vue = __webpack_require__(34);
 Vue.component('example', __webpack_require__(37));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
 
 
@@ -11373,7 +11373,11 @@ $.fn.select2.defaults.set("theme", "bootstrap4");
 
 $(document).ready(function () {
 
-  $('.js-select').select2();
+    $('.js-select').each(function (index, element) {
+        $(element).select2({
+            placeholder: $(element).data('placeholder')
+        });
+    });
 });
 
 /***/ }),

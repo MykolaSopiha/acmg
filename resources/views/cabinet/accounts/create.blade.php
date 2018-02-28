@@ -1,4 +1,4 @@
-@extends('cabinet.layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
@@ -12,20 +12,18 @@
             <a href="{{route('cabinet:accounts.index')}}">Аккаунты</a>
         </li>
         <li class="breadcrumb-item active">
-            {{$account->id}}
+            Добавить
         </li>
     </ol>
     <!-- Breadcrumbs end -->
 
-
     <!-- Form begin -->
-    <form action="{{route('cabinet:accounts.update', $account->id)}}" method="POST" class="form">
+    <form action="{{route('cabinet:accounts.store')}}" method="POST" class="form">
         {!! csrf_field() !!}
 
         <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
             <label for="url">Url</label>
-            <input type="text" class="form-control" id="url" name="url" value="{{$account->url}}" placeholder=""
-                   required>
+            <input type="text" class="form-control" id="url" name="url" value="{{old('url')}}" placeholder="" required>
             @if ($errors->has('url'))
                 <p class="text-danger">{{ $errors->first('url') }}</p>
             @endif
@@ -34,7 +32,7 @@
         <div class="form-group{{ $errors->has('viewer_id') ? ' has-error' : '' }}" required>
             <label for="viewer_id">Team Viewer ID</label>
             <input type="text" class="form-control" id="viewer_id" name="viewer_id"
-                   value="{{$account->viewer_id}}" placeholder="">
+                   value="{{old('viewer_id')}}" placeholder="">
             @if ($errors->has('viewer_id'))
                 <p class="text-danger">{{ $errors->first('viewer_id') }}</p>
             @endif
@@ -43,7 +41,7 @@
         <div class="form-group{{ $errors->has('viewer_pass') ? ' has-error' : '' }}" required>
             <label for="viewer_pass">Team Viewer Password</label>
             <input type="text" class="form-control" id="viewer_pass" name="viewer_pass"
-                   value="{{$account->viewer_pass}}" placeholder="">
+                   value="{{old('viewer_pass')}}" placeholder="">
             @if ($errors->has('viewer_pass'))
                 <p class="text-danger">{{ $errors->first('viewer_pass') }}</p>
             @endif
@@ -52,7 +50,7 @@
         <div class="form-group{{ $errors->has('schedule') ? ' has-error' : '' }}">
             <label for="schedule">Рассписание</label>
             <textarea cols="1000" rows="3" class="form-control" id="schedule" name="schedule" placeholder=""
-                      required>{{$account->schedule}}</textarea>
+                      required>{{old('schedule')}}</textarea>
             @if ($errors->has('schedule'))
                 <p class="text-danger">{{ $errors->first('schedule') }}</p>
             @endif

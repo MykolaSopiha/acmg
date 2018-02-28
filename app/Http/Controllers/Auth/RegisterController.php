@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Country;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -40,6 +41,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+        return view('auth.register', compact('countries'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,9 +56,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'country_id' => 'required|numeric|exists:countries,id',
+            'phone' => 'required|numeric|unique:users'
         ]);
     }
 
@@ -83,6 +92,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'parent_id' => $parentId,
             'referer_key' => $refererKey,
+            'country_id' => $data['country_id'],
+            'phone' => $data['phone'],
         ]);
         $user->save();
 

@@ -28,7 +28,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
 <!-- Navigation BEGIN-->
-@include('admin.layouts.navbar')
+@include('cabinet.layouts.navbar')
 <!-- Navigation END-->
 
 <!-- Navigation BEGIN-->

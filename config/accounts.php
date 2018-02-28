@@ -1,10 +1,12 @@
 <?php
 
 return [
+
     'statuses' => [
-        'testing',
+        'expected',
+        'tested',
         'working',
-        'not actual',
-        'potential',
+        'trash',
     ]
+
 ];

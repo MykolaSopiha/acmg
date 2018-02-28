@@ -2,10 +2,11 @@
 
 
 @section('content')
+
     <!-- Breadcrumbs begin -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            Консоль
+            My Dashboard
         </li>
     </ol>
     <!-- Breadcrumbs end -->
@@ -15,9 +16,9 @@
             <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-address-card-o"></i>
+                        <i class="fa fa-fw fa-comments"></i>
                     </div>
-                    <div class="mr-5">Аккаунты: {{$accounts}}</div>
+                    <div class="mr-5">{{$users}} Users</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                     <span class="float-left">View Details</span>
@@ -31,9 +32,9 @@
             <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-money"></i>
+                        <i class="fa fa-fw fa-list"></i>
                     </div>
-                    <div class="mr-5">Баланс: {{$balance}}</div>
+                    <div class="mr-5">{{$accounts}} Accounts</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                     <span class="float-left">View Details</span>
@@ -47,9 +48,9 @@
             <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-credit-card"></i>
+                        <i class="fa fa-fw fa-shopping-cart"></i>
                     </div>
-                    <div class="mr-5">Выплаты: {{$balance}}</div>
+                    <div class="mr-5">{{$sessions}} Sessions</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                     <span class="float-left">View Details</span>
@@ -63,9 +64,9 @@
             <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-users"></i>
+                        <i class="fa fa-fw fa-support"></i>
                     </div>
-                    <div class="mr-5">Рефералы: {{$referals}}</div>
+                    <div class="mr-5">{{$payment}} Payments</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                     <span class="float-left">View Details</span>
@@ -76,4 +77,5 @@
             </div>
         </div>
     </div>
+
 @endsection

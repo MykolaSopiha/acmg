@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('skype')->nullable();
             $table->string('phone')->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('referer_key');
             $table->rememberToken();

@@ -16,7 +16,7 @@
             <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-comments"></i>
+                        <i class="fa fa-fw fa-users"></i>
                     </div>
                     <div class="mr-5">{{$users}} Users</div>
                 </div>
@@ -32,7 +32,7 @@
             <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-list"></i>
+                        <i class="fa fa-fw fa-address-card-o"></i>
                     </div>
                     <div class="mr-5">{{$accounts}} Accounts</div>
                 </div>
@@ -48,7 +48,7 @@
             <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-shopping-cart"></i>
+                        <i class="fa fa-fw fa-clock-o"></i>
                     </div>
                     <div class="mr-5">{{$sessions}} Sessions</div>
                 </div>
@@ -64,7 +64,7 @@
             <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-support"></i>
+                        <i class="fa fa-fw fa-money"></i>
                     </div>
                     <div class="mr-5">{{$payments}} Payments</div>
                 </div>

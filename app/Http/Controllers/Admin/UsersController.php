@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Account;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -55,5 +56,23 @@ class UsersController extends Controller
     {
         User::findOrFail($id)->delete();
         return back()->with(['success' => 'User deleted!']);
+    }
+
+    public function userAccounts($id)
+    {
+        $accounts = Account::where('user_id', $id);
+        return view('admin.users.accounts', compact('accounts'));
+    }
+
+    public function userPayments($id)
+    {
+        $payments = Payment::where('user_id', $id);
+        return view('admin.users.payments', compact('payments'));
+    }
+
+    public function userTransactions($id)
+    {
+        $transaction = Transaction::where('user_id', $id);
+        return view('admin.users.transaction', compact('transaction'));
     }
 }

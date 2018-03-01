@@ -54,5 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Payment');
     }
+
+    public function referals()
+    {
+        return User::where('parent_id', $this->id)->get();
+    }
     // Relationships END
 }

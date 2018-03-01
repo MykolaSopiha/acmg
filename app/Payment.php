@@ -3,15 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payment extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id',
         'account_id',
         'amount',
         'currency_id',
         'status',
+        'comment',
     ];
 
     // Mutators BEGIN
@@ -43,9 +47,9 @@ class Payment extends Model
         return $this->belongsTo('App\Account');
     }
 
-    public function session()
+    public function withdraw()
     {
-        return $this->hasMany('App\Session');
+        return $this->belongsTo('App\Withdraw');
     }
     // Relationships END
 }

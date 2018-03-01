@@ -6,7 +6,7 @@
     <!-- Breadcrumbs begin -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{{route('cabinet:dashboard')}}">Dashboard</a>
+            <a href="{{route('admin:dashboard')}}">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">
             Accounts
@@ -39,7 +39,9 @@
                 <td>{{$account->viewer_id}}</td>
                 <td>{{$account->viewer_pass}}</td>
                 <td>{{$account->schedule}}</td>
-                <td>{{$statuses[intval($account->status)]}}</td>
+                <td>
+                    {{$statuses[intval($account->status)]}}
+                </td>
                 <td style="text-align: right;">
                     <a class="btn btn-link" href="{{route('admin:accounts.edit', $account->id)}}">
                         <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>

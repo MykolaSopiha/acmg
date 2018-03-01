@@ -17,9 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('home', ['uses' => 'Admin\DashboardController@index', 'as' => 'dashboard', 'middleware' => ['auth', 'role:admin']]);
+Route::get('home', ['uses' => 'Cabinet\DashboardController@index', 'as' => 'dashboard', 'middleware' => ['auth', 'role:user']]);
+
 Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin'], 'role' => 'admin'], function () {
 
-    Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
+    Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
+
+    Route::get('profile', ['uses' => 'UserController@index', 'as' => 'user.view']);
+    Route::post('profile', ['uses' => 'UserController@update', 'as' => 'user.update']);
 
     Route::get('profile', ['uses' => 'UserController@index', 'as' => 'user.view']);
     Route::post('profile', ['uses' => 'UserController@update', 'as' => 'user.update']);
@@ -32,6 +38,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/admin', ['uses' => 'UsersController@attachAdminRole', 'as' => 'attachAdmin']);
         Route::get('/{id}/user', ['uses' => 'UsersController@detachAdminRole', 'as' => 'detachAdmin']);
         Route::get('/{id}/delete', ['uses' => 'UsersController@delete', 'as' => 'delete']);
+        Route::get('/{id}/accounts', ['uses' => 'UsersController@userAccounts', 'as' => 'accounts']);
+        // todo: make select from user's accounts
+        // Route::get('/accounts', ['uses' => 'UsersController@xhrUserAccounts', 'as' => 'xhr.accounts']);
     });
 
     Route::group(['prefix' => 'accounts', 'as' => 'accounts.'], function () {
@@ -64,21 +73,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/delete', ['uses' => 'PaymentController@delete', 'as' => 'delete']);
     });
 
-    Route::group(['prefix' => 'transactions', 'as' => 'transactions.'], function () {
-        Route::get('/', ['uses' => 'TransactionController@index', 'as' => 'index']);
-        Route::get('/create', ['uses' => 'TransactionController@create', 'as' => 'create']);
-        Route::post('/create', ['uses' => 'TransactionController@store', 'as' => 'store']);
-        Route::get('/{id}', ['uses' => 'TransactionController@view', 'as' => 'view']);
-        Route::get('/{id}/edit', ['uses' => 'TransactionController@edit', 'as' => 'edit']);
-        Route::post('/{id}/update', ['uses' => 'TransactionController@update', 'as' => 'update']);
-        Route::get('/{id}/delete', ['uses' => 'TransactionController@delete', 'as' => 'delete']);
+    Route::group(['prefix' => 'withdraws', 'as' => 'withdraws.'], function () {
+        Route::get('/', ['uses' => 'WithdrawController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'WithdrawController@create', 'as' => 'create']);
+        Route::post('/create', ['uses' => 'WithdrawController@store', 'as' => 'store']);
+        Route::get('/{id}', ['uses' => 'WithdrawController@view', 'as' => 'view']);
+        Route::get('/{id}/edit', ['uses' => 'WithdrawController@edit', 'as' => 'edit']);
+        Route::post('/{id}/update', ['uses' => 'WithdrawController@update', 'as' => 'update']);
+        Route::get('/{id}/delete', ['uses' => 'WithdrawController@delete', 'as' => 'delete']);
     });
 
 });
 
 Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth', 'role:user']], function () {
 
-    Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
+    Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 
     Route::get('profile', ['uses' => 'UserController@index', 'as' => 'user.view']);
     Route::post('profile', ['uses' => 'UserController@update', 'as' => 'user.update']);
@@ -122,14 +131,14 @@ Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet
         Route::get('/{id}/delete', ['uses' => 'PaymentController@delete', 'as' => 'delete']);
     });
 
-    Route::group(['prefix' => 'transactions', 'as' => 'transactions.'], function () {
-        Route::get('/', ['uses' => 'TransactionController@index', 'as' => 'index']);
-        Route::get('/create', ['uses' => 'TransactionController@create', 'as' => 'create']);
-        Route::post('/create', ['uses' => 'TransactionController@store', 'as' => 'store']);
-        Route::get('/{id}', ['uses' => 'TransactionController@view', 'as' => 'view']);
-        Route::get('/{id}/edit', ['uses' => 'TransactionController@edit', 'as' => 'edit']);
-        Route::post('/{id}/update', ['uses' => 'TransactionController@update', 'as' => 'update']);
-        Route::get('/{id}/delete', ['uses' => 'TransactionController@delete', 'as' => 'delete']);
+    Route::group(['prefix' => 'withdraws', 'as' => 'withdraws.'], function () {
+        Route::get('/', ['uses' => 'WithdrawController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'WithdrawController@create', 'as' => 'create']);
+        Route::post('/create', ['uses' => 'WithdrawController@store', 'as' => 'store']);
+        Route::get('/{id}', ['uses' => 'WithdrawController@view', 'as' => 'view']);
+        Route::get('/{id}/edit', ['uses' => 'WithdrawController@edit', 'as' => 'edit']);
+        Route::post('/{id}/update', ['uses' => 'WithdrawController@update', 'as' => 'update']);
+        Route::get('/{id}/delete', ['uses' => 'WithdrawController@delete', 'as' => 'delete']);
     });
 
 });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSessionsTable extends Migration
+class CreateWithdrawalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('withdrawals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id');
-            $table->integer('manager_id');
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->text('comment');
+            $table->string('card_code');
+            $table->integer('amount')->unsigned();
+            $table->integer('currency_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +30,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('withdraws');
     }
 }

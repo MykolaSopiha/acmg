@@ -8,8 +8,8 @@ class Session extends Model
 {
     protected $fillable = [
         'account_id',
-        'session_start',
-        'session_end',
+        'start',
+        'end',
         'manager_id',
         'comment',
     ];
@@ -22,6 +22,6 @@ class Session extends Model
 
     public function manager()
     {
-        return $this->belongsTo('App\Payment', 'manager_id', 'id');
+        return $this->belongsTo('App\User', 'manager_id', 'id');
     }
 }

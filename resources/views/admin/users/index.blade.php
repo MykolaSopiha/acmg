@@ -23,6 +23,7 @@
             <th scope="col">Nickname</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Role</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -40,12 +41,9 @@
                     @endif
                 </td>
                 <td style="text-align: right;">
-                    {{--@if($user->hasRole('admin'))--}}
-                        {{--<a class="btn btn-link" href="{{route('admin:users.view', $user->id)}}">--}}
-                            {{--<i class="fa fa-eye fa-lg" aria-hidden="true"></i>--}}
-                        {{--</a>--}}
-                    {{--@else--}}
-                    {{--@endif--}}
+                    <a class="btn btn-link" href="{{route('admin:users.accounts', $user->id)}}">
+                        <i class="fa fa-money fa-lg" aria-hidden="true"></i>
+                    </a>
                     <a class="btn btn-link" href="{{route('admin:users.edit', $user->id)}}">
                         <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                     </a>

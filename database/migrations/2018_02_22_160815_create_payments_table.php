@@ -21,6 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('currency_id');
             $table->enum('status', ['new', 'expect', 'test', 'work', 'trash']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

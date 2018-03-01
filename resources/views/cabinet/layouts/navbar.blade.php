@@ -13,7 +13,7 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin:user.view')}}">
+                <a class="nav-link" href="{{route('cabinet:user.view')}}">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Профиль
                 </a>
             </li>

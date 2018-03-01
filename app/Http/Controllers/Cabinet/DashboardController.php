@@ -17,6 +17,8 @@ class DashboardController extends Controller
         $sessions = Session::all()->count();
         $users = User::all()->count();
         $payments = Payment::all()->count();
-        return view('admin.dashboard', compact('accounts', 'sessions', 'users', 'payments'));
+        $balance = 0;
+        $referals = 0;
+        return view('cabinet.dashboard', compact('accounts', 'sessions', 'users', 'payments', 'balance', 'referals'));
     }
 }

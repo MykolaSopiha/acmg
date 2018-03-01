@@ -33,7 +33,7 @@
         </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-        <a class="nav-link" href="{{route('admin:transactions.index')}}">
+        <a class="nav-link" href="{{route('admin:withdrawals.index')}}">
             <i class="fa fa-credit-card" aria-hidden="true"></i>
             <span class="nav-link-text">Withdraw</span>
         </a>

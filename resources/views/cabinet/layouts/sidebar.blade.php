@@ -30,7 +30,7 @@
         </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="{{route('cabinet:dashboard')}}">
+        <a class="nav-link" href="{{route('cabinet:docs.faq')}}">
             <i class="fa fa-fw fa-question-circle"></i>
             <span class="nav-link-text">FAQ</span>
         </a>

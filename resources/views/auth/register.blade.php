@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-10 offset-sm-1">
 
-                    <div class="card card-register mx-auto mt-5">
+                    <div class="card card-register mx-auto mt-5 mb-5">
                         <div class="card-header card-header--dark">Register an Account</div>
                         <div class="card-body">
                             <form class="form" method="POST" action="{{ route('register') }}">
@@ -64,7 +64,9 @@
                                         <option value=""></option>
                                         @foreach($countries as $country)
                                             <option value="{{$country->id}}"
-                                                    data-phone="{{$country->phone}}" {{($country->id == old('country_id') ? 'selected' : '')}}>{{$country->name}}</option>
+                                                    data-phone="{{$country->phone}}" {{($country->id == old('country_id') ? 'selected' : '')}}>
+                                                {{$country->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('country_id'))
@@ -131,7 +133,7 @@
             $('#country').on('change', function () {
                 let dialling_code = $(this).find("option:selected").data('phone');
                 $('#dialling-code').html(dialling_code);
-            })
+            });
         })
     </script>
 @endpush

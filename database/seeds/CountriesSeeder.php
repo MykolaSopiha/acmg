@@ -27,6 +27,21 @@ class CountriesSeeder extends Seeder
     {
         return [
             [
+                "country_code" => "BY",
+                "country_name" => "Belarus",
+                "dialling_code" => "+375"
+            ],
+            [
+                "country_code" => "RU",
+                "country_name" => "Russia",
+                "dialling_code" => "+7"
+            ],
+            [
+                "country_code" => "UA",
+                "country_name" => "Ukraine",
+                "dialling_code" => "+380"
+            ],
+            [
                 "country_code" => "AF",
                 "country_name" => "Afghanistan",
                 "dialling_code" => "+93"
@@ -110,11 +125,6 @@ class CountriesSeeder extends Seeder
                 "country_code" => "BB",
                 "country_name" => "Barbados",
                 "dialling_code" => "+1"
-            ],
-            [
-                "country_code" => "BY",
-                "country_name" => "Belarus",
-                "dialling_code" => "+375"
             ],
             [
                 "country_code" => "BE",
@@ -867,11 +877,6 @@ class CountriesSeeder extends Seeder
                 "dialling_code" => "+40"
             ],
             [
-                "country_code" => "RU",
-                "country_name" => "Russia",
-                "dialling_code" => "+7"
-            ],
-            [
                 "country_code" => "RW",
                 "country_name" => "Rwanda",
                 "dialling_code" => "+250"
@@ -1112,11 +1117,6 @@ class CountriesSeeder extends Seeder
                 "dialling_code" => "+256"
             ],
             [
-                "country_code" => "UA",
-                "country_name" => "Ukraine",
-                "dialling_code" => "+380"
-            ],
-            [
                 "country_code" => "AE",
                 "country_name" => "United Arab Emirates",
                 "dialling_code" => "+971"
@@ -1185,7 +1185,7 @@ class CountriesSeeder extends Seeder
                 "country_code" => "ZW",
                 "country_name" => "Zimbabwe",
                 "dialling_code" => "+263"
-            ]
+            ],
         ];
     }
 }

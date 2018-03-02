@@ -8,13 +8,14 @@ class Session extends Model
 {
     protected $fillable = [
         'account_id',
+        'manager_id',
         'start',
         'end',
-        'manager_id',
         'comment',
     ];
 
 
+    // Relationships BEGIN
     public function account()
     {
         return $this->belongsTo('App\Account');
@@ -24,4 +25,5 @@ class Session extends Model
     {
         return $this->belongsTo('App\User', 'manager_id', 'id');
     }
+    // Relationships END
 }

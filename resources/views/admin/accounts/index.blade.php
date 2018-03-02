@@ -16,7 +16,6 @@
 
     <header class="mb-4">
         <h1 class="">Accounts List</h1>
-        <a class="text-link" href="{{route('admin:accounts.create')}}">Add New Account</a>
     </header>
 
     <table class="table">

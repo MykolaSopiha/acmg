@@ -19,6 +19,7 @@ class CreateCountriesTable extends Migration
             $table->string('code')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

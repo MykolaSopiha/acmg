@@ -12,7 +12,7 @@
         </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="{{route('cabinet:payments.index')}}">
+        <a class="nav-link" href="">
             <i class="fa fa-fw fa-money"></i>
             <span class="nav-link-text">Баланс</span>
         </a>
@@ -24,7 +24,7 @@
         </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="{{route('cabinet:dashboard')}}">
+        <a class="nav-link" href="">
             <i class="fa fa-fw fa-users"></i>
             <span class="nav-link-text">Рефералы</span>
         </a>

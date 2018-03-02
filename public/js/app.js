@@ -11378,6 +11378,10 @@ $(document).ready(function () {
             placeholder: $(element).data('placeholder')
         });
     });
+
+    $("#alertsDropdown").click(function () {
+        $.get('/markAsRead');
+    });
 });
 
 /***/ }),

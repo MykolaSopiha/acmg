@@ -24,12 +24,17 @@ const app = new Vue({
 import 'select2';
 $.fn.select2.defaults.set( "theme", "bootstrap4" );
 
+
 $(document).ready(function () {
 
     $('.js-select').each(function (index, element) {
         $(element).select2({
             placeholder: $(element).data('placeholder')
         });
+    });
+
+    $("#alertsDropdown").click(function () {
+        $.get('/markAsRead');
     });
 
 });

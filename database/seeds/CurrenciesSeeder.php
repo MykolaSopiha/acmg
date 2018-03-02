@@ -18,7 +18,12 @@ class CurrenciesSeeder extends Seeder
             $currencyEntity = new Currency();
             $currencyEntity->symbol = $cur['symbol'];
             $currencyEntity->name = $cur['name'];
+            $currencyEntity->symbol_native = $cur['symbol_native'];
+            $currencyEntity->decimal_digits = $cur['decimal_digits'];
+            $currencyEntity->rounding = $cur['rounding'];
             $currencyEntity->code = $cur['code'];
+            $currencyEntity->name_plural = $cur['name_plural'];
+            $currencyEntity->country_id = (isset($cur['country_id'])) ? $cur['country_id'] : null;
             $currencyEntity->save();
         }
     }
@@ -204,7 +209,8 @@ class CurrenciesSeeder extends Seeder
                 "decimal_digits" => 0,
                 "rounding" => 0,
                 "code" => "BYR",
-                "name_plural" => "Belarusian rubles"
+                "name_plural" => "Belarusian rubles",
+                "country_id" => 1
             ],
             "BZD" => [
                 "symbol" => "BZ$",
@@ -861,7 +867,8 @@ class CurrenciesSeeder extends Seeder
                 "decimal_digits" => 2,
                 "rounding" => 0,
                 "code" => "RUB",
-                "name_plural" => "Russian rubles"
+                "name_plural" => "Russian rubles",
+                "country_id" => 2
             ],
             "RWF" => [
                 "symbol" => "RWF",
@@ -996,7 +1003,8 @@ class CurrenciesSeeder extends Seeder
                 "decimal_digits" => 2,
                 "rounding" => 0,
                 "code" => "UAH",
-                "name_plural" => "Ukrainian hryvnias"
+                "name_plural" => "Ukrainian hryvnias",
+                "country_id" => 3
             ],
             "UGX" => [
                 "symbol" => "USh",

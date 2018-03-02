@@ -33,7 +33,7 @@
             @if (Route::has('login'))
                 <nav class="nav nav-masthead justify-content-center">
                     @auth
-                        <a class="nav-link" href="{{route('cabinet:dashboard')}}">Главная</a>
+                        <a class="nav-link" href="{{url('/home')}}">Главная</a>
                     @else
                         <a class="nav-link" href="{{route('register')}}">Регистрация</a>
                         <a class="nav-link" href="{{route('login')}}">Войти</a>

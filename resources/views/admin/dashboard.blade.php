@@ -20,7 +20,7 @@
                     </div>
                     <div class="mr-5">{{$users}} Users</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:users.index')}}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="mr-5">{{$accounts}} Accounts</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:accounts.index')}}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="mr-5">{{$sessions}} Sessions</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:sessions.index')}}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="mr-5">{{$payments}} Payments</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:payments.index')}}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>

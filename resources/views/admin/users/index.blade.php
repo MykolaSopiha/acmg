@@ -23,7 +23,6 @@
             <th scope="col">Nickname</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">Role</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -42,6 +41,9 @@
                 </td>
                 <td style="text-align: right;">
                     <a class="btn btn-link" href="{{route('admin:users.accounts', $user->id)}}">
+                        <i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-link" href="{{route('admin:users.deposits', $user->id)}}">
                         <i class="fa fa-money fa-lg" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-link" href="{{route('admin:users.edit', $user->id)}}">

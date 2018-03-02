@@ -6,14 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Withdraw extends Model
 {
-    protected $table = 'withdrawals';
-
     protected $fillable = [
-        'card_code'
+        'wallet_id',
+        'amount',
+        'card_code',
+        'status',
+        'confirmed_by',
+        'confirmed_at',
     ];
 
-    public function payments()
+
+    // Relationships BEGIN
+    public function wallet()
     {
-        return $this->hasMany('App/Payments');
+        return $this->belongsTo('App\Wallet');
     }
+    // Relationships END
+
+
+    // Mutators BEGIN
+    public function getAmountAttribute($value)
+    {
+        return $value / ( pow(10, $this->wallet->currency->decimal_digits) );
+    }
+
+    public function setAmountAttribute($value)
+    {
+        $this->attributes['amount'] = intval($value * pow(10, $this->wallet->currency->decimal_digits));
+    }
+    // Mutators END
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Country;
+use App\Notifications\NewUser;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -50,7 +51,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -67,7 +68,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -85,6 +86,8 @@ class RegisterController extends Controller
             $refererKey = str_random(10);
         } while (User::where('referer_key', $refererKey)->first() instanceof User);
 
+        $phoneCode = Country::findOrfail($data['country_id'])->phone;
+
         $user = new User();
         $user->fill([
             'name' => $data['name'],
@@ -93,13 +96,20 @@ class RegisterController extends Controller
             'parent_id' => $parentId,
             'referer_key' => $refererKey,
             'country_id' => $data['country_id'],
-            'phone' => $data['phone'],
+            'phone' => $phoneCode . $data['phone'],
         ]);
         $user->save();
 
         $userRole = Role::where('name', 'user')->first();
 
         $user->attachRole($userRole);
+
+        $admins = User::whereHas('roles', function($q)
+        {
+            $q->where('name', 'admin');
+        })->get();
+
+        \Notification::send($admins, new NewUser($user));
 
         return $user;
     }

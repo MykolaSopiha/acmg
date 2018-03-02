@@ -39,6 +39,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     // Relationships BEGIN
     public function country()
     {
@@ -47,17 +48,53 @@ class User extends Authenticatable
 
     public function account()
     {
-        return $this->hasMany('App\Account', 'user_id', 'id');
+        return $this->hasMany('App\Account');
     }
 
-    public function payment()
+    public function wallet()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasOne('App\Wallet');
     }
 
     public function referals()
     {
-        return User::where('parent_id', $this->id)->get();
+        return $this->where('parent_id', $this->id)->get();
     }
     // Relationships END
+
+
+    // Mutators BEGIN
+    public function getPhoneAttribute($value)
+    {
+        return (is_null($value)) ? null : decrypt($value);
+    }
+
+    public function getSkypeAttribute($value)
+    {
+        return (is_null($value)) ? null : decrypt($value);
+    }
+
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone'] = encrypt($value);
+    }
+
+    public function setSkypeAttribute($value)
+    {
+        $this->attributes['skype'] = encrypt($value);
+    }
+
+    // Mutators END
+
+
+    public function initWallet()
+    {
+        if (is_null($this->wallet)) {
+            $wallet = new Wallet();
+            $wallet->user_id = $this->id;
+            $wallet->balance = 0;
+            $wallet->currency_id = $this->country->currency->id;
+            $wallet->save();
+        }
+    }
 }

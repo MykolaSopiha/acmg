@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
-
     use SoftDeletes;
-
 
     protected $fillable = [
         'url',
@@ -19,7 +17,27 @@ class Account extends Model
         'schedule',
         'comment',
         'status',
+        'confirmed_by',
+        'confirmed_at',
     ];
+
+
+    // Relationships BEGIN
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function session()
+    {
+        return $this->hasMany('App\Session');
+    }
+
+    public function deposit()
+    {
+        return $this->hasMany('App\Deposit');
+    }
+    // Relationships END
 
 
     // Mutators BEGIN
@@ -43,19 +61,4 @@ class Account extends Model
         return decrypt($value);
     }
     // Mutators END
-
-
-
-    // Relationships BEGIN
-    public function user()
-    {
-        return $this->belongsTo('App\User', 'user_id', 'id');
-    }
-
-    public function session()
-    {
-        return $this->hasMany('App\Session');
-    }
-    // Relationships END
-
 }

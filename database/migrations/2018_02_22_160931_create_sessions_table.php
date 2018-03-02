@@ -15,10 +15,10 @@ class CreateSessionsTable extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id');
-            $table->integer('manager_id');
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->integer('account_id')->unsigned();
+            $table->integer('manager_id')->unsigned();
+            $table->timestamp('start');
+            $table->timestamp('end');
             $table->text('comment');
             $table->timestamps();
         });

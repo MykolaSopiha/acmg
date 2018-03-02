@@ -7,49 +7,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payment extends Model
 {
-    use SoftDeletes;
-
     protected $fillable = [
-        'user_id',
-        'account_id',
+        'country_id',
         'amount',
-        'currency_id',
-        'status',
-        'comment',
+        'payment_type_id',
     ];
-
-    // Mutators BEGIN
-    public function setAmountAttribute($value)
-    {
-        $this->attributes['amount'] = intval(100*$value);
-    }
-
-    public function getAmountAttribute($value)
-    {
-        return money_format('%i', $value/100);
-    }
-    // Mutators END
 
 
     // Relationships BEGIN
-    public function user()
+    public function country()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Country');
     }
 
-    public function currency()
+    public function paymentType()
     {
-        return $this->belongsTo('App\Currency');
-    }
-
-    public function account()
-    {
-        return $this->belongsTo('App\Account');
-    }
-
-    public function withdraw()
-    {
-        return $this->belongsTo('App\Withdraw');
+        return $this->belongsTo('App\PaymentType');
     }
     // Relationships END
+
+
+    // Mutators BEGIN
+    public function getAmountAttribute($value)
+    {
+        return $value/(pow(10, $this->country->currency->decimal_digits));
+    }
+
+    public function setAmountAttribute($value)
+    {
+        $this->attributes['amount'] = intval($value*pow(10, $this->country->currency->decimal_digits));
+    }
+    // Mutators END
 }

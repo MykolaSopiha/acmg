@@ -78,7 +78,7 @@
     <script src={{url("vendor/jquery/jquery.min.js")}}></script>
     <script src={{url("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
     <!-- Core plugin JavaScript-->
-    <script src={{url("vendor/jquery-easing/jquery.easing.min.js")}}></script>
+    <script src={{url("js/jquery.easing.min.js")}}></script>
     <!-- Page level plugin JavaScript-->
     <script src={{url("vendor/datatables/js/jquery.dataTables.js")}}></script>
     <script src={{url("vendor/datatables/js/dataTables.bootstrap4.js")}}></script>

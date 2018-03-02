@@ -17,8 +17,11 @@ class UsersTableSeeder extends Seeder
         $user->name = 'admin';
         $user->email = 'admin@gmail.com';
         $user->password = Hash::make('123123');
+        $user->phone = '+380967368180';
+        $user->country_id = 3;
         $user->referer_key = str_random(10);
         $user->save();
+        $user->initWallet();
 
 
         $adminRole = Role::where('name', 'admin')->first();
@@ -31,8 +34,11 @@ class UsersTableSeeder extends Seeder
         $user->name = 'user';
         $user->email = 'user@gmail.com';
         $user->password = Hash::make('123123');
+        $user->phone = '+380967368180';
+        $user->country_id = 3;
         $user->referer_key = str_random(10);
         $user->save();
+        $user->initWallet();
 
         $user->attachRole($userRole);
     }

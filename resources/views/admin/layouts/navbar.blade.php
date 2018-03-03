@@ -22,11 +22,11 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
                         <h6 class="dropdown-header">New Alerts:</h6>
                         <div class="dropdown-divider"></div>
-                        @foreach(Auth::user()->unreadNotifications as $notifications)
-                            @include('admin.layouts.notifications.' . snake_case(class_basename($notifications->type)))
+                        @foreach(Auth::user()->unreadNotifications as $notification)
+                            @include('admin.partials.notifications.dropdown.' . snake_case(class_basename($notification->type)))
                             <div class="dropdown-divider"></div>
                         @endforeach
-                        <a class="dropdown-item small text-info" href="#">View all alerts</a>
+                        <a class="dropdown-item small text-info" href="{{route('admin:notifications.index')}}">View all alerts</a>
                     </div>
                 </li>
             @else
@@ -41,7 +41,7 @@
                             <div class="dropdown-message small">You haven't any new notifications.</div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item small text-info" href="#">View previous alerts</a>
+                        <a class="dropdown-item small text-info" href="{{route('admin:notifications.index')}}">View previous alerts</a>
                     </div>
                 </li>
             @endif

@@ -104,13 +104,6 @@ class RegisterController extends Controller
 
         $user->attachRole($userRole);
 
-        $admins = User::whereHas('roles', function($q)
-        {
-            $q->where('name', 'admin');
-        })->get();
-
-        \Notification::send($admins, new NewUser($user));
-
         return $user;
     }
 }

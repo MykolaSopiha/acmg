@@ -22,8 +22,8 @@ class CreateAccountsTable extends Migration
             $table->text('schedule');
             $table->integer('status');
             $table->text('comment');
-            $table->integer('confirmed_by')->unsigned();
-            $table->timestamp('confirmed_at');
+            $table->integer('confirmed_by')->unsigned()->nullable();
+            $table->timestamp('confirmed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -21,7 +21,6 @@ class UsersTableSeeder extends Seeder
         $user->country_id = 3;
         $user->referer_key = str_random(10);
         $user->save();
-        $user->initWallet();
 
 
         $adminRole = Role::where('name', 'admin')->first();
@@ -38,7 +37,6 @@ class UsersTableSeeder extends Seeder
         $user->country_id = 3;
         $user->referer_key = str_random(10);
         $user->save();
-        $user->initWallet();
 
         $user->attachRole($userRole);
     }

@@ -92,9 +92,8 @@
         </div>
 
         <div class="form-group text-center mt-5">
-            <button class="btn btn-success">
-                Save
-            </button>
+            <button class="btn btn-success">Save</button>
+            <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-primary">Confirm</a>
         </div>
     </form>
     <!-- Form end -->

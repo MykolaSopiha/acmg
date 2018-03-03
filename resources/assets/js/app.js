@@ -34,6 +34,7 @@ $(document).ready(function () {
     });
 
     $("#alertsDropdown").click(function () {
+        alert('hi');
         $.get('/markAsRead');
     });
 

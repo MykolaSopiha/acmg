@@ -29,6 +29,8 @@ class AccountController extends Controller
 
     public function store(Request $request)
     {
+        $request['viewer_id'] = preg_replace('/\s+/', '', $request['viewer_id']);
+
         $this->validate($request, [
             'url' => 'required|max:255',
             'viewer_id' => 'required|numeric',
@@ -62,6 +64,7 @@ class AccountController extends Controller
     public function update(Request $request, $id)
     {
         $account = Account::findOrFail($id);
+        $account->update($request->all());
         return view('cabinet.accounts.edit', compact('account'));
     }
 }

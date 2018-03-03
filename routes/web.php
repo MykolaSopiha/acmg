@@ -53,11 +53,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
 
     Route::group(['prefix' => 'accounts', 'as' => 'accounts.'], function () {
         Route::get('/', ['uses' => 'AccountController@index', 'as' => 'index']);
+        Route::get('/trash-list', ['uses' => 'AccountController@trashList', 'as' => 'trashList']);
         Route::get('/{id}', ['uses' => 'AccountController@view', 'as' => 'view']);
         Route::get('/{id}/edit', ['uses' => 'AccountController@edit', 'as' => 'edit']);
         Route::post('/{id}/update', ['uses' => 'AccountController@update', 'as' => 'update']);
         Route::get('/{id}/delete', ['uses' => 'AccountController@delete', 'as' => 'delete']);
-        Route::get('/{id}/trash-list', ['uses' => 'AccountController@trashList', 'as' => 'trashList']);
         Route::get('/{id}/confirm', ['uses' => 'AccountController@accountConfirm', 'as' => 'confirm']);
         Route::get('/{id}/deposits', ['uses' => 'AccountController@accountDeposits', 'as' => 'deposits']);
         Route::get('/{id}/sessions', ['uses' => 'AccountController@accountSessions', 'as' => 'sessions']);
@@ -108,6 +108,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/edit', ['uses' => 'PaymentTypeController@edit', 'as' => 'edit']);
         Route::post('/{id}/update', ['uses' => 'PaymentTypeController@update', 'as' => 'update']);
         Route::get('/{id}/delete', ['uses' => 'PaymentTypeController@delete', 'as' => 'delete']);
+    });
+
+    Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
+        Route::get('/', ['uses' => 'NotificationController@index', 'as' => 'index']);
     });
 
     Route::group(['prefix' => 'sessions', 'as' => 'sessions.'], function () {

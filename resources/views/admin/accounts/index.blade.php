@@ -16,6 +16,7 @@
 
     <header class="mb-4">
         <h1 class="">Accounts List</h1>
+        <a class="text-danger" href="{{route('admin:accounts.trashList')}}">Trash List</a>
     </header>
 
     <table class="table">
@@ -34,7 +35,9 @@
         @foreach($accounts as $account)
             <tr>
                 <td>{{$account->id}}</td>
-                <td>{{$account->user->name}}</td>
+                <td>
+                    <a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a>
+                </td>
                 <td>{{$account->viewer_id}}</td>
                 <td>{{$account->viewer_pass}}</td>
                 <td>{{$account->schedule}}</td>
@@ -42,8 +45,8 @@
                     {{$statuses[intval($account->status)]}}
                 </td>
                 <td style="text-align: right;">
-                    <a class="btn btn-link" href="{{route('admin:accounts.edit', $account->id)}}">
-                        <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+                    <a class="btn btn-link" href="{{route('admin:accounts.view', $account->id)}}">
+                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-link" href="{{route('admin:accounts.delete', $account->id)}}">
                         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>

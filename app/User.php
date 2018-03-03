@@ -39,6 +39,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'saved' => UserSaved::class,
+        'deleted' => UserDeleted::class,
+    ];
+
 
     // Relationships BEGIN
     public function country()
@@ -87,7 +97,7 @@ class User extends Authenticatable
     // Mutators END
 
 
-    public function initWallet()
+    public function createWallet()
     {
         if (is_null($this->wallet)) {
             $wallet = new Wallet();
@@ -96,5 +106,13 @@ class User extends Authenticatable
             $wallet->currency_id = $this->country->currency->id;
             $wallet->save();
         }
+    }
+
+    public static function getAdmins()
+    {
+        return User::whereHas('roles', function($q)
+        {
+            $q->where('name', 'admin');
+        })->get();
     }
 }

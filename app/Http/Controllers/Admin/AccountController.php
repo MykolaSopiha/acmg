@@ -48,10 +48,17 @@ class AccountController extends Controller
 //        return redirect()->route('admin:accounts.index')->with(['success' => 'Account created!']);
 //    }
 
+    public function view($id)
+    {
+        $account = Account::findOrFail($id);
+        return view('admin.accounts.view', compact('account'));
+    }
+
     public function edit($id)
     {
         $account = Account::findOrFail($id);
-        return view('admin.accounts.edit', compact('account'));
+        $users = User::all();
+        return view('admin.accounts.edit', compact('account', 'users'));
     }
 
     public function update(Request $request, $id)
@@ -83,9 +90,9 @@ class AccountController extends Controller
         return back()->with(['success' => 'Account deleted!']);
     }
 
-    public function trashList($id)
+    public function trashList()
     {
-        $accounts = Account::onlyTrashed($id)->get();
+        $accounts = Account::onlyTrashed()->get();
         return view('admin.accounts.trash', compact('accounts'));
     }
 

@@ -24,8 +24,6 @@
             <thead>
             <tr>
                 <th scope="col">Url</th>
-                <th scope="col">TV ID*</th>
-                <th scope="col">TV Pass*</th>
                 <th scope="col">Рассписание</th>
                 <th scope="col">Статус</th>
                 <th></th>
@@ -34,14 +32,16 @@
             <tbody>
             @foreach($accounts as $account)
                 <tr>
-                    <td>{{$account->user->name}}</td>
-                    <td>{{$account->viewer_id}}</td>
-                    <td>{{$account->viewer_pass}}</td>
-                    <td>{{$account->schedule}}</td>
+                    <td>
+                        {{(strlen($account->url) > 20) ? substr($account->url, 0, 17) . '...' : $account->url}}
+                    </td>
+                    <td>
+                        {{(strlen($account->schedule) > 30) ? substr($account->schedule, 0, 27) . '...' : $account->schedule}}
+                    </td>
                     <td>{{$statuses[$account->status]}}</td>
                     <td style="text-align: right;">
                         <a class="btn btn-link" href="{{route('cabinet:accounts.edit', $account->id)}}">
-                            <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+                            <i class="fa fa-cog" aria-hidden="true"></i>
                         </a>
                         <a class="btn btn-link" href="{{route('cabinet:accounts.delete', $account->id)}}">
                             <i class="fa fa-trash fa-lg" aria-hidden="true"></i>

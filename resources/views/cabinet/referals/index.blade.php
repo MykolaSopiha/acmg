@@ -16,7 +16,8 @@
 
     <h1 class="mb-3">Мои рефералы</h1>
 
-    <table class="table">
+    <div class="table-responsive">
+        <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -51,5 +52,6 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 
 @endsection

@@ -27,7 +27,7 @@
             <select name="account_id" class="js-select" id="account" style="width: 100%;">
                 <option value=""></option>
                 @foreach($accounts as $account)
-                    <option value="{{$account->id}}" {{(old('account_id') == $account->id) ? "selected" : ""}}>{{$account->user->name}} - {{$account->url}}</option>
+                    <option value="{{$account->id}}" {{(old('account_id') == $account->id) ? "selected" : ""}}>{{$account->profile_id}} - {{$account->user->name}}</option>
                 @endforeach
             </select>
             @if ($errors->has('account_id'))
@@ -37,7 +37,7 @@
 
         <div class="form-group{{ $errors->has('start') ? ' has-error' : '' }}">
             <label for="start">Start</label>
-            <input class="form-control" type="datetime-local" id="start" name="start" value="{{old('start')}}" placeholder="" required/>
+            <input class="form-control js-datatime-picker" type="text" id="start" name="start" value="{{old('start')}}" placeholder="" required/>
             @if ($errors->has('start'))
                 <p class="text-danger">{{ $errors->first('start') }}</p>
             @endif
@@ -45,7 +45,7 @@
 
         <div class="form-group{{ $errors->has('end') ? ' has-error' : '' }}">
             <label for="end">End</label>
-            <input class="form-control" type="datetime-local" id="end" name="end" value="{{old('end')}}" placeholder="" required/>
+            <input class="form-control js-datatime-picker" type="text" id="end" name="end" value="{{old('end')}}" placeholder="" required/>
             @if ($errors->has('end'))
                 <p class="text-danger">{{ $errors->first('end') }}</p>
             @endif

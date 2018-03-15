@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'admin@gmail.com';
         $user->password = Hash::make('123123');
         $user->phone = '+380967368180';
-        $user->country_id = 3;
+        $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();
 
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'user@gmail.com';
         $user->password = Hash::make('123123');
         $user->phone = '+380967368180';
-        $user->country_id = 3;
+        $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();
 

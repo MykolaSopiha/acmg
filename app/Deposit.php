@@ -31,7 +31,7 @@ class Deposit extends Model
 
     public function account()
     {
-        return $this->belongsTo('App\Account');
+        return $this->belongsTo('App\Account')->withTrashed();
     }
     // Relationships END
 
@@ -47,4 +47,19 @@ class Deposit extends Model
         $this->attributes['amount'] = intval($value * pow(10, $this->wallet->currency->decimal_digits));
     }
     // Mutators END
+
+
+    public function makeAvailable()
+    {
+        $depositAvailable = $this->update([
+            'available' => true,
+        ]);
+
+        $newBalance = $this->wallet->balance + $this->amount;
+        $balanceUpdate = $this->wallet->update([
+            'balance' => $newBalance,
+        ]);
+
+        return ($depositAvailable && $balanceUpdate);
+    }
 }

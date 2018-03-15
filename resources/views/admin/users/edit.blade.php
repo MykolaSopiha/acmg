@@ -70,6 +70,12 @@
             <p>Referal Key: <span class="badge badge-dark">{{$user->referer_key}}</span></p>
         </div>
 
+        @if ($user->parent_id)
+            <div class="form-group">
+                <p>Patron: <a class="badge badge-info" href="{{ route('admin:users.view', $user->getParent()->id) }}">{{$user->getParent()->name}}</a></p>
+            </div>
+        @endif
+
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Save</button>
             @if ($user->hasRole('admin'))

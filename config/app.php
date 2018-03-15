@@ -182,6 +182,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\DatatablesServiceProvider::class,
         App\Providers\jQueryServiceProvider::class,
+        App\Providers\InputmaskServiceProvider::class,
         App\Providers\Select2ServiceProvider::class,
         App\Providers\Select2BootstrapThemeServiceProvider::class,
 

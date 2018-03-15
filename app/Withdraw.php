@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Withdraw extends Model
 {
@@ -21,13 +22,18 @@ class Withdraw extends Model
     {
         return $this->belongsTo('App\Wallet');
     }
+
+    public function inspector()
+    {
+        return $this->hasOne('App\User', 'id', 'confirmed_by');
+    }
     // Relationships END
 
 
     // Mutators BEGIN
     public function getAmountAttribute($value)
     {
-        return $value / ( pow(10, $this->wallet->currency->decimal_digits) );
+        return $value / (pow(10, $this->wallet->currency->decimal_digits));
     }
 
     public function setAmountAttribute($value)
@@ -35,4 +41,23 @@ class Withdraw extends Model
         $this->attributes['amount'] = intval($value * pow(10, $this->wallet->currency->decimal_digits));
     }
     // Mutators END
+
+
+    public function confirm()
+    {
+        if ($this->wallet->balance >= $this->amount) {
+            $balance = $this->wallet->update([
+                'balance' => $this->wallet->balance - $this->amount,
+            ]);
+
+            $withdraw = $this->update([
+                'confirmed_at' => date("Y-m-d H:i:s"),
+                'confirmed_by' => Auth::user()->id,
+            ]);
+
+            return $balance && $withdraw;
+        }
+
+        return false;
+    }
 }

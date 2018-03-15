@@ -4,7 +4,7 @@
 @section('content')
     <main role="main">
         <div class="card card-login mx-auto mt-5">
-            <div class="card-header">Login</div>
+            <div class="card-header">Вход</div>
             <div class="card-body">
                 <form class="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}

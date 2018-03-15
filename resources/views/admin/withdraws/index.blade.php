@@ -22,14 +22,22 @@
             <th scope="col">#</th>
             <th scope="col">User</th>
             <th scope="col">Amount</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         @foreach($withdraws as $withdraw)
             <tr>
                 <td>{{$withdraw->id}}</td>
-                <td>{{$withdraw->user->name}}</td>
+                <td>{{$withdraw->wallet->user->name}}</td>
                 <td>{{$withdraw->amount}}&nbsp;{{$withdraw->wallet->currency->symbol}}</td>
+                <td>
+                    @if (is_null($withdraw->confirmed_by))
+                        <a class="btn btn-success" href="{{ route('admin:withdraws.confirm', $withdraw->id) }}">confirm</a>
+                    @else
+                        <span>confirmed by <a href="{{ route('admin:users.view', $withdraw->inspector->id) }}">{{ $withdraw->inspector->name }}</a> at {{ $withdraw->confirmed_at }}</span>
+                    @endif
+                </td>
             </tr>
         @endforeach
         </tbody>

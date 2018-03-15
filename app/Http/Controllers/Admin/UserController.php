@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Validator;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -17,12 +19,34 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        // todo: make unique validation on update
-        $this->validate($request, [
-            'name' => 'string|max:255',
-            'email' => 'string|email|max:255',
-            'phone' => 'nullable|numeric'
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                'required',
+                'max:255',
+                Rule::unique('users')->ignore($request['name'], 'name')
+            ],
+            'email' => [
+                'required',
+                'max:255',
+                Rule::unique('users')->ignore($request['email'], 'email')
+            ],
+            'phone' => [
+                'required',
+                'numeric',
+                Rule::unique('users')->ignore($request['phone'], 'phone')
+            ],
+            'full_name' => 'string|max:255|nullable',
+            'skype' => [
+                'string',
+                'max:255',
+                'nullable',
+                Rule::unique('users')->ignore($request['skype'], 'skype')
+            ],
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $user = Auth::user();
         $user->fill($request->toArray());

@@ -47,8 +47,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/user', ['uses' => 'UsersController@detachAdminRole', 'as' => 'detachAdmin']);
         Route::get('/{id}/delete', ['uses' => 'UsersController@delete', 'as' => 'delete']);
         Route::get('/{id}/accounts', ['uses' => 'UsersController@userAccounts', 'as' => 'accounts']);
-        Route::get('/{id}/deposits', ['uses' => 'UsersController@userDeposits', 'as' => 'deposits']);
-        Route::get('/{id}/withdraws', ['uses' => 'UsersController@userWithdraws', 'as' => 'withdraws']);
+        Route::get('/{id}/wallet', ['uses' => 'UsersController@userWallet', 'as' => 'wallet']);
     });
 
     Route::group(['prefix' => 'accounts', 'as' => 'accounts.'], function () {
@@ -61,6 +60,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/confirm', ['uses' => 'AccountController@accountConfirm', 'as' => 'confirm']);
         Route::get('/{id}/deposits', ['uses' => 'AccountController@accountDeposits', 'as' => 'deposits']);
         Route::get('/{id}/sessions', ['uses' => 'AccountController@accountSessions', 'as' => 'sessions']);
+        Route::get('/{id}/status/{status_id}', ['uses' => 'AccountController@setStatus', 'as' => 'setStatus']);
     });
 
     Route::group(['prefix' => 'countries', 'as' => 'countries.'], function () {
@@ -150,6 +150,10 @@ Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet
         Route::get('/{id}/delete', ['uses' => 'AccountController@delete', 'as' => 'delete']);
     });
 
+    Route::group(['prefix' => 'wallet', 'as' => 'wallet.'], function () {
+        Route::get('/', ['uses' => 'WalletController@index', 'as' => 'index']);
+    });
+
     Route::group(['prefix' => 'deposits', 'as' => 'deposits.'], function () {
         Route::get('/', ['uses' => 'DepositController@index', 'as' => 'index']);
         Route::get('/{id}', ['uses' => 'DepositController@view', 'as' => 'view']);
@@ -161,11 +165,6 @@ Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet
         Route::get('/{id}/accounts', ['uses' => 'UsersController@accounts', 'as' => 'accounts']);
     });
 
-    Route::group(['prefix' => 'sessions', 'as' => 'sessions.'], function () {
-        Route::get('/', ['uses' => 'SessionController@index', 'as' => 'index']);
-        Route::get('/{id}', ['uses' => 'SessionController@view', 'as' => 'view']);
-    });
-
     Route::group(['prefix' => 'withdraws', 'as' => 'withdraws.'], function () {
         Route::get('/', ['uses' => 'WithdrawController@index', 'as' => 'index']);
         Route::get('/create', ['uses' => 'WithdrawController@create', 'as' => 'create']);
@@ -174,6 +173,7 @@ Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet
     });
 
     Route::group(['prefix' => 'docs', 'as' => 'docs.'], function () {
+        Route::get('start', ['uses' => 'DocumentController@start', 'as' => 'start']);
         Route::get('faq', ['uses' => 'DocumentController@faq', 'as' => 'faq']);
     });
 

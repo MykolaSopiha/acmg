@@ -70,8 +70,15 @@
             <p>Referal Key: <span class="badge badge-dark">{{$user->referer_key}}</span></p>
         </div>
 
+        @if ($user->parent_id)
+            <div class="form-group">
+                <p>Patron: <a class="badge badge-info" href="{{ route('admin:users.view', $user->getParent()->id) }}">{{$user->getParent()->name}}</a></p>
+            </div>
+        @endif
+
         <div class="form-group text-center">
-            <a href="{{route('admin:users.index')}}" class="btn btn-primary">Back</a>
+            <a href="{{route('admin:users.index')}}" class="btn btn-primary">All Users</a>
+            <a href="{{route('admin:users.edit', $user->id)}}" class="btn btn-warning">Edit</a>
             <a href="{{route('admin:users.delete', $user->id)}}" class="btn btn-danger">Delete</a>
         </div>
 

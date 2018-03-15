@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">{{config('app.name')}}</a>
+    <a class="navbar-brand" href="#">{{config('app.name')}}</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
         @include('cabinet.layouts.sidebar')
         <!-- Navigation END-->
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto d-flex flex-row justify-content-around">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('cabinet:user.view')}}">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Профиль

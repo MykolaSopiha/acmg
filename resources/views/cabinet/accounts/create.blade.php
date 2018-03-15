@@ -21,11 +21,12 @@
     <form action="{{route('cabinet:accounts.store')}}" method="POST" class="form">
         {!! csrf_field() !!}
 
-        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-            <label for="url">Url</label>
-            <input type="text" class="form-control" id="url" name="url" value="{{old('url')}}" placeholder="" required>
-            @if ($errors->has('url'))
-                <p class="text-danger">{{ $errors->first('url') }}</p>
+        <div class="form-group{{ $errors->has('profile_id') ? ' has-error' : '' }}">
+            <label for="profile_id">ID</label>
+            <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{old('profile_id')}}"
+                   required>
+            @if ($errors->has('profile_id'))
+                <p class="text-danger">{{ $errors->first('profile_id') }}</p>
             @endif
         </div>
 

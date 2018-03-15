@@ -26,7 +26,7 @@ class PaymentTypesSeeder extends Seeder
     {
         return [
             [
-                "name" => "Availability",
+                "name" => "Account confirmed",
                 "description" => "Account has been tested and is suitable for use",
                 "label" => "valid",
             ],

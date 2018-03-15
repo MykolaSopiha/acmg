@@ -21,8 +21,8 @@
     <form class="form">
 
         <div class="form-group">
-            <label for="url">Url</label>
-            <input type="text" id="url" class="form-control" value="{{$account->url}}" readonly>
+            <label for="profile_id">ID</label>
+            <input type="text" id="profile_id" class="form-control" value="{{$account->profile_id}}" readonly>
         </div>
 
         <div class="form-group">
@@ -55,10 +55,20 @@
             <input type="text" id="status" class="form-control" value="{{$statuses[$account->status]}}" readonly>
         </div>
 
+        @if ($account->isConfirmed())
+            <div class="form-group">
+                confirmed by
+                <a href="{{ route('admin:users.view', $account->confirmed_by) }}">{{ $account->inspector->name }}</a>
+                at {{ $account->confirmed_at }}
+            </div>
+        @endif
+
         <div class="form-group text-center mt-5">
             <button class="btn btn-success">Save</button>
-            <a href="{{route('admin:accounts.edit', $account->id)}}" class="btn btn-dark">Edit</a>
-            <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-primary">Confirm</a>
+            <a href="{{route('admin:accounts.edit', $account->id)}}" class="btn btn-warning">Edit</a>
+            @if (!$account->isConfirmed())
+                <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-primary">Confirm</a>
+            @endif
         </div>
     </form>
     <!-- Form end -->

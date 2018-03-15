@@ -19,8 +19,8 @@ class CreateWithdrawsTable extends Migration
             $table->integer('amount')->unsigned();
             $table->string('card_code');
             $table->integer('status')->unsigned();
-            $table->integer('confirmed_by')->unsigned();
-            $table->timestamp('confirmed_at');
+            $table->integer('confirmed_by')->unsigned()->nullable();
+            $table->timestamp('confirmed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

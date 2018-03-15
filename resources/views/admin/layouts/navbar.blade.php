@@ -33,6 +33,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-lg-2" id="alertsEmpty" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-fw fa-bell"></i>
+                        <span class="d-lg-none">
+                            Notifications
+                        </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsEmpty">
                         <h6 class="dropdown-header">No Alerts:</h6>
@@ -45,7 +48,8 @@
                     </div>
                 </li>
             @endif
-
+        </ul>
+        <ul class="navbar-nav d-flex flex-row justify-content-around">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin:user.view')}}">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Profile

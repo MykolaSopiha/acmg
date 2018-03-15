@@ -9,6 +9,7 @@
         "datatables/datatables": "^1.10",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "robinherbots/jquery.inputmask": "^3.3",
         "santigarcor/laratrust": "5.0.*",
         "twbs/bootstrap": "^4.0",
         "yajra/laravel-datatables-oracle": "^8.4"

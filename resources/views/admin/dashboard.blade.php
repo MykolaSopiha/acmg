@@ -66,9 +66,9 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-money"></i>
                     </div>
-                    <div class="mr-5">{{$payments}} Payments</div>
+                    <div class="mr-5">{{$withdraws}} Withdraws</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:payments.index')}}">
+                <a class="card-footer text-white clearfix small z-1" href="{{route('admin:withdraws.index')}}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -77,5 +77,25 @@
             </div>
         </div>
     </div>
+
+    {{--<div class="table-responsive">--}}
+        {{--<table class="table">--}}
+            {{--<thead>--}}
+            {{--<tr>--}}
+                {{--<th colspan="2">Statistics:</th>--}}
+            {{--</tr>--}}
+            {{--</thead>--}}
+            {{--<tbody>--}}
+            {{--<tr>--}}
+                {{--<td>New users</td>--}}
+                {{--<td style="text-align: right;">12</td>--}}
+            {{--</tr>--}}
+            {{--<tr>--}}
+                {{--<td>Новые аккаунты</td>--}}
+                {{--<td style="text-align: right;">12</td>--}}
+            {{--</tr>--}}
+            {{--</tbody>--}}
+        {{--</table>--}}
+    {{--</div>--}}
 
 @endsection

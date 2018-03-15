@@ -63,6 +63,12 @@
             <p>Реферальный ключ: <span class="badge badge-dark">{{Auth::user()->referer_key}}</span></p>
         </div>
 
+        @if ($user->parent_id)
+            <div class="form-group">
+                <p>Patron: {{$user->getParent()->name}}</p>
+            </div>
+        @endif
+
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Сохранить</button>
             <a href="#" class="btn btn-link">Изменить пароль</a>

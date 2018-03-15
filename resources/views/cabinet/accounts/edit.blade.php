@@ -12,7 +12,7 @@
             <a href="{{route('cabinet:accounts.index')}}">Аккаунты</a>
         </li>
         <li class="breadcrumb-item active">
-            {{$account->id}}
+            {{$account->profile_id}}
         </li>
     </ol>
     <!-- Breadcrumbs end -->
@@ -22,12 +22,12 @@
     <form action="{{route('cabinet:accounts.update', $account->id)}}" method="POST" class="form">
         {!! csrf_field() !!}
 
-        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-            <label for="url">Url</label>
-            <input type="text" class="form-control" id="url" name="url" value="{{$account->url}}" placeholder=""
-                   required>
-            @if ($errors->has('url'))
-                <p class="text-danger">{{ $errors->first('url') }}</p>
+        <div class="form-group{{ $errors->has('profile_id') ? ' has-error' : '' }}">
+            <label for="profile_id">ID Аккаунта</label>
+            <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{$account->profile_id}}" placeholder=""
+                   readonly>
+            @if ($errors->has('profile_id'))
+                <p class="text-danger">{{ $errors->first('profile_id') }}</p>
             @endif
         </div>
 
@@ -59,9 +59,8 @@
         </div>
 
         <div class="form-group text-center mt-5">
-            <button class="btn btn-success">
-                Сохранить
-            </button>
+            <button class="btn btn-success">Сохранить</button>
+            <a class="btn btn-link" href="{{ route('cabinet:accounts.index') }}">Назад</a>
         </div>
     </form>
     <!-- Form end -->

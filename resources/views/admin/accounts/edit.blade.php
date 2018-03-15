@@ -17,17 +17,17 @@
     </ol>
     <!-- Breadcrumbs end -->
 
-
     <!-- Form begin -->
     <form action="{{route('admin:accounts.update', $account->id)}}" method="POST" class="form">
         {!! csrf_field() !!}
 
-        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-            <label for="url">Url</label>
-            <input type="text" class="form-control" id="url" name="url" value="{{$account->url}}" placeholder=""
+        <div class="form-group{{ $errors->has('profile_id') ? ' has-error' : '' }}">
+            <label for="profile_id">ID</label>
+            <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{$account->profile_id}}"
+                   placeholder=""
                    required>
-            @if ($errors->has('url'))
-                <p class="text-danger">{{ $errors->first('url') }}</p>
+            @if ($errors->has('profile_id'))
+                <p class="text-danger">{{ $errors->first('profile_id') }}</p>
             @endif
         </div>
 
@@ -72,8 +72,8 @@
 
         <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
             <label for="comment">Comment</label>
-            <textarea cols="1000" rows="3" class="form-control" id="comment" name="comment" placeholder=""
-                      required>{{$account->comment}}</textarea>
+            <textarea cols="1000" rows="3" class="form-control" id="comment" name="comment"
+                      placeholder="">{{$account->comment}}</textarea>
             @if ($errors->has('comment'))
                 <p class="text-danger">{{ $errors->first('comment') }}</p>
             @endif
@@ -81,19 +81,27 @@
 
         <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
             <label for="status">Status</label>
-            <select name="status" id="status" class="js-select" style="width: 100%;">
-                @foreach($statuses as $key => $val)
-                    <option value="{{$key}}" {{($key == $account->status) ? "selected" : ""}}>{{$val}}</option>
-                @endforeach
-            </select>
-            @if ($errors->has('comment'))
-                <p class="text-danger">{{ $errors->first('comment') }}</p>
+            @if ($account->isConfirmed())
+                <div class="form-group">
+                    confirmed by
+                    <a href="{{ route('admin:users.view', $account->confirmed_by) }}">{{ $account->inspector->name }}</a>
+                    at {{ $account->confirmed_at }}
+                </div>
+            @else
+                <select name="status" id="status" class="js-select" style="width: 100%;">
+                    @foreach($statuses as $key => $val)
+                        <option value="{{$key}}" {{($key == $account->status) ? "selected" : ""}}>{{$val}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('comment'))
+                    <p class="text-danger">{{ $errors->first('comment') }}</p>
+                @endif
             @endif
         </div>
 
         <div class="form-group text-center mt-5">
-            <button class="btn btn-success">Save</button>
-            <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-primary">Confirm</a>
+            <a href="{{ route('admin:accounts.trashList') }}" class="btn btn-primary">Back</a>
+            <a href="#" class="btn btn-success">Restore</a>
         </div>
     </form>
     <!-- Form end -->

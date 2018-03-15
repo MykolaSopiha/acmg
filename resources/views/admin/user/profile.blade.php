@@ -5,9 +5,9 @@
     <!-- Breadcrumbs begin -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="index.html">Консоль</a>
+            <a href="index.html">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Профиль</li>
+        <li class="breadcrumb-item active">Profile</li>
     </ol>
     <!-- Breadcrumbs end -->
 
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name">Никнейм</label>
+            <label for="name">Nickname</label>
             <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}"
                    placeholder="Ваш никнейм на сайте">
             @if ($errors->has('name'))
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-            <label for="full_name">Ф.И.О.</label>
+            <label for="full_name">Full name*</label>
             <input type="text" class="form-control" id="full_name" name="full_name" value="{{$user->full_name}}"
                    placeholder="Введите Ваше полное имя">
             @if ($errors->has('full_name'))
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-            <label for="phone">Телефон</label>
+            <label for="phone">Phone*</label>
             <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone}}"
                    placeholder="Контактный номер телефона">
             @if ($errors->has('phone'))
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('skype') ? ' has-error' : '' }}">
-            <label for="skype">Skype</label>
+            <label for="skype">Skype*</label>
             <input type="text" class="form-control" id="skype" name="skype" value="{{$user->skype}}"
                    placeholder="Ваш никнейм в Skype">
             @if ($errors->has('skype'))
@@ -60,17 +60,18 @@
         </div>
 
         <div class="form-group">
-            <p>Реферальный ключ: <span class="badge badge-dark">{{Auth::user()->referer_key}}</span></p>
+            <p>Referal key: <span class="badge badge-dark">{{Auth::user()->referer_key}}</span></p>
         </div>
 
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-success">Сохранить</button>
-            <a href="#" class="btn btn-link">Изменить пароль</a>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="#" class="btn btn-link">Reset password</a>
         </div>
 
         <div class="form-group mt-5">
             <div class="alert alert-light">
-                *Мы не передаем Вашу персональную информацию третьим лицам.
+                *Not necessary<br>
+                **We don't share your personal info with any other persons.
             </div>
         </div>
 

@@ -55,10 +55,13 @@
     <footer class="mastfoot mt-auto">
         <div class="inner text-center">
             <p>
-                За дополнительной информацией обращайтесь<br/>
-                <a class="btn btn-default" href="tel:+380967368180"><i class="fas fa-phone-square"></i></a>
-                <a class="btn btn-default" href="mailto:niksop94@gmail.com"><i class="far fa-envelope"></i></a>
-                <a class="btn btn-default" href="telegram.me/@groupname"><i class="fab fa-telegram-plane"></i></a>
+                За дополнительной информацией обращайтесь по телефонам:<br/>
+                <a class="btn btn-default" href="tel:{{config('contacts.phones.Kyivstar')}}">
+                    {{config('contacts.phones.Kyivstar')}}
+                </a>
+                <a class="btn btn-default" href="tel:{{config('contacts.phones.MTS')}}">
+                    {{config('contacts.phones.MTS')}}
+                </a>
             </p>
         </div>
     </footer>

@@ -210,7 +210,7 @@ class CurrenciesSeeder extends Seeder
                 "rounding" => 0,
                 "code" => "BYR",
                 "name_plural" => "Belarusian rubles",
-                "country_id" => 1
+                "country_id" => 3
             ],
             "BZD" => [
                 "symbol" => "BZ$",
@@ -1004,7 +1004,7 @@ class CurrenciesSeeder extends Seeder
                 "rounding" => 0,
                 "code" => "UAH",
                 "name_plural" => "Ukrainian hryvnias",
-                "country_id" => 3
+                "country_id" => 1
             ],
             "UGX" => [
                 "symbol" => "USh",

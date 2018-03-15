@@ -22,7 +22,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">User</th>
             <th scope="col">TV ID*</th>
             <th scope="col">TV Pass*</th>
@@ -34,7 +34,7 @@
         <tbody>
         @foreach($accounts as $account)
             <tr>
-                <td>{{$account->id}}</td>
+                <td>{{$account->profile_id}}</td>
                 <td>
                     <a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a>
                 </td>
@@ -42,7 +42,26 @@
                 <td>{{$account->viewer_pass}}</td>
                 <td>{{$account->schedule}}</td>
                 <td>
-                    {{$statuses[intval($account->status)]}}
+                    @if ($account->confirmed_at)
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="{{ "confirmed by ". $account->inspector->name . " at ".$account->confirmed_at }}">
+                            confirmed
+                        </button>
+                    @else
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ $statuses[$account->status] }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach ($statuses as $key => $val)
+                                    <a class="dropdown-item"
+                                       href="{{ route('admin:accounts.setStatus', [$account->id, $key]) }}">{{ $val }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </td>
                 <td style="text-align: right;">
                     <a class="btn btn-link" href="{{route('admin:accounts.view', $account->id)}}">
@@ -58,5 +77,7 @@
     </table>
 
     <p class="text-secondary">*TV - Team Viewer</p>
+
+    {{--@include('admin.partials.modals.account_confirmation')--}}
 
 @endsection

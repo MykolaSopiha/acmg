@@ -3,10 +3,17 @@
 return [
 
     'statuses' => [
+        'new',
         'expected',
         'tested',
-        'working',
-        'trash',
-    ]
+        'confirmed',
+    ],
+
+    'statuses_ru' => [
+        'новый',
+        'возможный',
+        'тест',
+        'подтвержден',
+    ],
 
 ];

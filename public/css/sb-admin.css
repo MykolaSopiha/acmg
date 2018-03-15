@@ -476,3 +476,9 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+
+/* CUSTOM STYLES */
+ .help-block {
+   color: #ff0000;
+ }

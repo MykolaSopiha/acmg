@@ -8,6 +8,9 @@
         <li class="breadcrumb-item">
             <a href="{{route('cabinet:dashboard')}}">Консоль</a>
         </li>
+        <li class="breadcrumb-item">
+            Справка
+        </li>
         <li class="breadcrumb-item active">
             FAQ
         </li>
@@ -15,7 +18,7 @@
     <!-- Breadcrumbs end -->
 
     <header class="mb-4">
-        <h1>Часто задаваемые вопросы</h1>
+        <h1>FAQ: Часто задаваемые вопросы</h1>
     </header>
 
     <div id="accordion">

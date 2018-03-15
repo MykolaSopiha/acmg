@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Account;
+use App\Deposit;
 use App\Role;
 use App\User;
+use App\Withdraw;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -60,19 +62,14 @@ class UsersController extends Controller
 
     public function userAccounts($id)
     {
-        $accounts = Account::where('user_id', $id);
-        return view('admin.users.accounts', compact('accounts'));
+        $user = User::findOrFail($id);
+        $accounts = Account::withTrashed()->where('user_id', $id)->get();
+        return view('admin.users.accounts', compact('accounts', 'user'));
     }
 
-    public function userPayments($id)
+    public function userWallet($id)
     {
-        $payments = Payment::where('user_id', $id);
-        return view('admin.users.payments', compact('payments'));
-    }
-
-    public function userTransactions($id)
-    {
-        $transaction = Transaction::where('user_id', $id);
-        return view('admin.users.transaction', compact('transaction'));
+        $user = User::findOrFail($id);
+        return view('admin.users.wallet', compact('user', 'deposits', 'withdraws'));
     }
 }

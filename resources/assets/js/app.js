@@ -21,6 +21,7 @@ const app = new Vue({
     el: '#app'
 });
 
+
 import 'select2';
 $.fn.select2.defaults.set( "theme", "bootstrap4" );
 
@@ -34,8 +35,20 @@ $(document).ready(function () {
     });
 
     $("#alertsDropdown").click(function () {
-        alert('hi');
         $.get('/markAsRead');
+    });
+
+    $('.numberInput').on('keypress', function (event) {
+        return event.charCode >= 48 && event.charCode <= 57
+    });
+
+    $('[data-toggle="popover"]').popover();
+
+    $('.btn-confirm-account').click(function (e) {
+        e.preventDefault();
+        let confirmLink = $(this).data('link');
+        alert(confirmLink);
+
     });
 
 });

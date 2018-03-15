@@ -43,10 +43,14 @@
                 </td>
                 <td>
                     <a href="{{route('admin:accounts.view', $deposit->wallet->user->id)}}">
-                        {{$deposit->account->url}}
+                        {{$deposit->account->profile_id}}
                     </a>
                 </td>
-                <td>{{$deposit->paymentType->label}}</td>
+                <td>
+                    <a href="{{ route('admin:accounts.view', $deposit->account->profile_id) }}">
+                        {{$deposit->paymentType->label}}
+                    </a>
+                </td>
                 <td>
                     {{($deposit->available) ? "available" : "expected"}}
                 </td>

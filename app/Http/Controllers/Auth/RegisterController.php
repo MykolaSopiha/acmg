@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/cabinet/profile';
+    protected $redirectTo = 'cabinet/docs/start';
 
     /**
      * Create a new controller instance.
@@ -56,12 +56,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $phoneCode = Country::findOrfail($data['country_id'])->phone;
+        $data['phone'] = $phoneCode . $data['phone'];
+
         return Validator::make($data, [
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'country_id' => 'required|numeric|exists:countries,id',
-            'phone' => 'required|numeric|unique:users'
+            'phone' => 'required|numeric|unique:users',
         ]);
     }
 
@@ -96,7 +99,7 @@ class RegisterController extends Controller
             'parent_id' => $parentId,
             'referer_key' => $refererKey,
             'country_id' => $data['country_id'],
-            'phone' => $phoneCode . $data['phone'],
+            'phone' => $data['phone'],
         ]);
         $user->save();
 

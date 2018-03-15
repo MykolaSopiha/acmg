@@ -55,16 +55,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Уверены, что хотите выйти?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Нажмите книпку "Выход", если вы хотите завершить текущую сессию.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
                     <a class="btn btn-primary" href="#"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</a>
                     <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -72,15 +72,18 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
+    <!-- jQuery -->
     <script src={{url("vendor/jquery/jquery.min.js")}}></script>
+    <!-- Bootstrap core JavaScript-->
     <script src={{url("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
-    <!-- Core plugin JavaScript-->
-    <script src={{url("vendor/jquery-easing/jquery.easing.min.js")}}></script>
-    <!-- Page level plugin JavaScript-->
+    <!-- Core plugin JavaScript -->
+    <script src={{url("js/jquery.easing.min.js")}}></script>
+    <!-- RobinHerbots/Inputmask JavaScript -->
+    <script src={{url("vendor/inputmask/jquery.inputmask.bundle.min.js")}}></script>
+    <!-- Page level plugin JavaScript -->
     <script src={{url("vendor/datatables/js/jquery.dataTables.js")}}></script>
     <script src={{url("vendor/datatables/js/dataTables.bootstrap4.js")}}></script>
-    <!-- Custom scripts for all pages-->
+    <!-- Custom scripts for all pages -->
     <script src="{{url("js/sb-admin.min.js")}}"></script>
     <!-- Custom scripts for this site-->
     <script src="{{url("js/app.js")}}"></script>

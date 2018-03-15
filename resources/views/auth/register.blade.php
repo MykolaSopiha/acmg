@@ -8,7 +8,7 @@
                 <div class="col-sm-10 offset-sm-1">
 
                     <div class="card card-register mx-auto mt-5 mb-5">
-                        <div class="card-header card-header--dark">Register an Account</div>
+                        <div class="card-header card-header--dark">Регистрация</div>
                         <div class="card-body">
                             <form class="form" method="POST" action="{{ route('register') }}">
                                 {{ csrf_field() }}
@@ -82,10 +82,8 @@
                                         <div class="input-group-prepend">
                                             <span id="dialling-code" class="input-group-text">+380</span>
                                         </div>
-                                        <input id="phone" type="tel" class="form-control" name="phone"
-                                               value="{{old('phone')}}"
-                                               onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                                               required>
+                                        <input id="phone" type="tel" class="form-control numberInput" name="phone"
+                                               value="{{old('phone')}}" required>
                                     </div>
                                     @if ($errors->has('phone'))
                                         <p class="help-block">
@@ -112,9 +110,9 @@
                                 </div>
                             </form>
                             <div class="text-center">
-                                <a class="d-block small mt-3 text-primary" href="{{ route('login') }}">Login Page</a>
-                                <a class="d-block small text-primary" href="{{ route('password.request') }}">Forgot
-                                    Password?</a>
+                                <a class="d-block small mt-3 text-primary" href="{{ route('login') }}">Вход</a>
+                                <a class="d-block small text-primary" href="{{ route('password.request') }}">Забыли
+                                    пароль?</a>
                             </div>
                         </div>
                     </div>

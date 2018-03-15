@@ -66,34 +66,33 @@ class User extends Authenticatable
         return $this->hasOne('App\Wallet');
     }
 
-    public function referals()
+    public function inspector()
     {
-        return $this->where('parent_id', $this->id)->get();
+        return $this->belongsTo('App\Account', 'id', 'confirmed_by');
     }
     // Relationships END
 
 
     // Mutators BEGIN
-    public function getPhoneAttribute($value)
-    {
-        return (is_null($value)) ? null : decrypt($value);
-    }
-
-    public function getSkypeAttribute($value)
-    {
-        return (is_null($value)) ? null : decrypt($value);
-    }
-
-    public function setPhoneAttribute($value)
-    {
-        $this->attributes['phone'] = encrypt($value);
-    }
-
-    public function setSkypeAttribute($value)
-    {
-        $this->attributes['skype'] = encrypt($value);
-    }
-
+//    public function getPhoneAttribute($value)
+//    {
+//        return (is_null($value)) ? null : decrypt($value);
+//    }
+//
+//    public function getSkypeAttribute($value)
+//    {
+//        return (is_null($value)) ? null : decrypt($value);
+//    }
+//
+//    public function setPhoneAttribute($value)
+//    {
+//        $this->attributes['phone'] = encrypt($value);
+//    }
+//
+//    public function setSkypeAttribute($value)
+//    {
+//        $this->attributes['skype'] = encrypt($value);
+//    }
     // Mutators END
 
 
@@ -102,8 +101,8 @@ class User extends Authenticatable
         if (is_null($this->wallet)) {
             $wallet = new Wallet();
             $wallet->user_id = $this->id;
-            $wallet->balance = 0;
             $wallet->currency_id = $this->country->currency->id;
+            $wallet->balance = 0;
             $wallet->save();
         }
     }
@@ -114,5 +113,15 @@ class User extends Authenticatable
         {
             $q->where('name', 'admin');
         })->get();
+    }
+
+    public function getReferals()
+    {
+        return $this->where('parent_id', $this->id)->get();
+    }
+
+    public function getParent()
+    {
+        return $this->where('id', $this->parent_id)->first();
     }
 }

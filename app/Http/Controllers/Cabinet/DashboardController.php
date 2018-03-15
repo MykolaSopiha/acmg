@@ -3,22 +3,18 @@
 namespace App\Http\Controllers\Cabinet;
 
 use App\Account;
-use App\Payment;
-use App\Session;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $accounts = Account::all()->count();
-        $sessions = Session::all()->count();
-        $users = User::all()->count();
-        $payments = Payment::all()->count();
-        $balance = 0;
-        $referals = 0;
-        return view('cabinet.dashboard', compact('accounts', 'sessions', 'users', 'payments', 'balance', 'referals'));
+        $accounts = Account::where('user_id', Auth::user()->id)->count();
+        $referals = Auth::user()->getReferals()->count();
+        $withdraw = Auth::user()->wallet->getWithdrawnMoney();
+        $balance = Auth::user()->wallet->getBalanceMoney();
+        return view('cabinet.dashboard', compact('accounts', 'withdraw', 'balance', 'referals'));
     }
 }

@@ -19,7 +19,7 @@
                     </div>
                     <div class="mr-5">Аккаунты: {{$accounts}}</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{ route('cabinet:accounts.index') }}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="mr-5">Баланс: {{$balance}}</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{ route('cabinet:wallet.index') }}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -49,9 +49,9 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-credit-card"></i>
                     </div>
-                    <div class="mr-5">Выплаты: {{$balance}}</div>
+                    <div class="mr-5">Выведено денег: {{$withdraw}}</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{ route('cabinet:withdraws.index') }}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="mr-5">Рефералы: {{$referals}}</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{ route('cabinet:users.index') }}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                 <i class="fa fa-angle-right"></i>

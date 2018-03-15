@@ -8,8 +8,11 @@
         <li class="breadcrumb-item">
             <a href="{{route('admin:dashboard')}}">Dashboard</a>
         </li>
+        <li class="breadcrumb-item">
+            <a href="{{route('admin:accounts.index')}}">Accounts</a>
+        </li>
         <li class="breadcrumb-item active">
-            Accounts
+            Trash List
         </li>
     </ol>
     <!-- Breadcrumbs end -->
@@ -22,7 +25,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">User</th>
             <th scope="col">TV ID*</th>
             <th scope="col">TV Pass*</th>
@@ -34,7 +37,7 @@
         <tbody>
         @foreach($accounts as $account)
             <tr>
-                <td>{{$account->id}}</td>
+                <td>{{$account->profile_id}}</td>
                 <td>{{$account->user->name}}</td>
                 <td>{{$account->viewer_id}}</td>
                 <td>{{$account->viewer_pass}}</td>

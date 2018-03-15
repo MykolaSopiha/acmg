@@ -40,12 +40,14 @@
                     @endif
                 </td>
                 <td style="text-align: right;">
-                    <a class="btn btn-link" href="{{route('admin:users.accounts', $user->id)}}">
-                        <i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>
-                    </a>
-                    <a class="btn btn-link" href="{{route('admin:users.deposits', $user->id)}}">
-                        <i class="fa fa-money fa-lg" aria-hidden="true"></i>
-                    </a>
+                    @if (!$user->hasRole('admin'))
+                        <a class="btn btn-link" href="{{route('admin:users.accounts', $user->id)}}">
+                            <i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-link" href="{{route('admin:users.wallet', $user->id)}}">
+                            <i class="fa fa-money fa-lg" aria-hidden="true"></i>
+                        </a>
+                    @endif
                     <a class="btn btn-link" href="{{route('admin:users.edit', $user->id)}}">
                         <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                     </a>

@@ -50,13 +50,13 @@ class AccountController extends Controller
 
     public function view($id)
     {
-        $account = Account::findOrFail($id);
+        $account = Account::withTrashed()->findOrFail($id);
         return view('admin.accounts.view', compact('account'));
     }
 
     public function edit($id)
     {
-        $account = Account::findOrFail($id);
+        $account = Account::withTrashed()->findOrFail($id);
         $users = User::all();
         return view('admin.accounts.edit', compact('account', 'users'));
     }
@@ -64,7 +64,7 @@ class AccountController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'url' => 'required|max:255',
+            'profile_id' => 'required|numeric',
             'viewer_id' => 'required|numeric',
             'viewer_pass' => 'required|numeric',
             'schedule' => 'required',
@@ -99,11 +99,7 @@ class AccountController extends Controller
     public function accountConfirm($id)
     {
         $account = Account::findOrFail($id);
-
-        $account->confirmed_at = strtotime(Carbon::now());
-        $account->confirmed_by = Auth::user()->id;
-        $account->save();
-
+        $account->confirm();
         return back()->with(['success' => 'Account confirmed!']);
     }
 
@@ -121,5 +117,19 @@ class AccountController extends Controller
         $sessions = $account->session->get();
 
         return view('admin.accounts.sessions', compact('account', 'sessions'));
+    }
+
+    public function setStatus($id, $status_id)
+    {
+        $statuses = config('accounts.statuses');
+
+        if ($statuses[$status_id] == 'confirmed') {
+            Account::findOrFail($id)->confirm();
+        } else {
+            Account::findOrFail($id)->update([
+                'status' => $status_id,
+            ]);
+        }
+        return back()->with(['success' => 'Account updated']);
     }
 }

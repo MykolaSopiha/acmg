@@ -6,6 +6,7 @@ use App\Account;
 use App\Payment;
 use App\Session;
 use App\User;
+use App\Withdraw;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,7 @@ class DashboardController extends Controller
         $accounts = Account::all()->count();
         $sessions = Session::all()->count();
         $users = User::all()->count();
-        $payments = Payment::all()->count();
-        return view('admin.dashboard', compact('accounts', 'sessions', 'users', 'payments'));
+        $withdraws = Withdraw::all()->count();
+        return view('admin.dashboard', compact('accounts', 'sessions', 'users', 'withdraws'));
     }
 }

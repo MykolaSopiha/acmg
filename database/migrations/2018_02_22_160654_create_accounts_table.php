@@ -15,13 +15,13 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
+            $table->string('profile_id')->unique();
             $table->integer('user_id')->unsigned();
-            $table->string('viewer_id');
-            $table->string('viewer_pass');
-            $table->text('schedule');
+            $table->string('viewer_id')->nullable();
+            $table->string('viewer_pass')->nullable();
+            $table->text('schedule')->nullable();
             $table->integer('status');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->integer('confirmed_by')->unsigned()->nullable();
             $table->timestamp('confirmed_at')->nullable();
             $table->timestamps();

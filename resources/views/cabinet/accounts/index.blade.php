@@ -42,10 +42,9 @@
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Рассписание</th>
-                <th scope="col">TV ID</th>
-                <th scope="col">TV Pass</th>
+                <th scope="col" class="text-center">Доступ</th>
                 <th scope="col">Статус</th>
-                <th scope="col" style="text-align: right;">Настройки</th>
+                <th scope="col" class="text-right">Настройки</th>
             </tr>
             </thead>
             <tbody>
@@ -57,8 +56,13 @@
                         </a>
                     </td>
                     <td>{{$account->schedule}}</td>
-                    <td>{{$account->viewer_id}}</td>
-                    <td>{{$account->viewer_pass}}</td>
+                    <td class="text-center">
+                        @if ($account->viewer_id != '' && $account->viewer_pass != '')
+                            <span class="text-success"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        @else
+                            <span class="text-secondary"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                        @endif
+                    </td>
                     <td>
                         <span class="badge badge-primary">{{config('accounts.statuses_ru')[$account->status]}}</span>
                     </td>

@@ -81,4 +81,10 @@ class AccountController extends Controller
 
         return redirect()->route('cabinet:accounts.index');
     }
+
+    public function timetable($id)
+    {
+        $account = Account::findOrFail($id);
+        return view('cabinet.accounts.timetable', compact('account'));
+    }
 }

@@ -11,14 +11,16 @@ class WithdrawRequested extends Notification
 {
     use Queueable;
 
+    protected $withdraw;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($withdraw)
     {
-        //
+        $this->withdraw = $withdraw;
     }
 
     /**
@@ -29,7 +31,7 @@ class WithdrawRequested extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -38,12 +40,16 @@ class WithdrawRequested extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toDatabase($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return [
+            'id' => $this->withdraw->id,
+            'user_id' => $this->withdraw->wallet->user->id,
+            'user_name' => $this->withdraw->wallet->user->name,
+            'amount' => $this->withdraw->amount,
+            'currency' => $this->withdraw->wallet->currency->code,
+            'time' => time(),
+        ];
     }
 
     /**

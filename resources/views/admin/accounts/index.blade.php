@@ -34,7 +34,11 @@
         <tbody>
         @foreach($accounts as $account)
             <tr>
-                <td>{{$account->profile_id}}</td>
+                <td>
+                    <a href="https://www.facebook.com/profile.php?id={{$account->profile_id}}" target="_blank">
+                        {{$account->profile_id}}
+                    </a>
+                </td>
                 <td>
                     <a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a>
                 </td>

@@ -78,6 +78,12 @@ class Account extends Model
         }
     }
 
+    /**
+     * Function make account confirmed by admin who call it and add
+     * available deposit to account user and user's patron (if patron exists).
+     *
+     * @return bool
+     */
     public function confirm()
     {
         $account = $this->update([
@@ -121,8 +127,46 @@ class Account extends Model
         return ($account && $deposit);
     }
 
+    /**
+     * Check if account is confirmed by some admin
+     *
+     * @return bool
+     */
     public function isConfirmed()
     {
         return ( !is_null($this->confirmed_by) && !is_null($this->confirmed_at) );
+    }
+
+    /**
+     * Get collection of confirmed accounts
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getConfirmedAccounts()
+    {
+        return self::where([
+            ['confirmed_by', '<>', null],
+            ['confirmed_at', '<>', null],
+        ])->get();
+    }
+
+    /**
+     * Function make week payment to user wallet if user's account is confirmed
+     */
+    public function depositWeekPayment()
+    {
+        $weekPaymentType = PaymentType::where('label', 'week')->first();
+        $weekPayment = $weekPaymentType->payment->where('country_id', $this->user->country->id)->first();
+
+        $deposit = new Deposit();
+        $deposit->fill([
+            'wallet_id' => $this->user->wallet->id,
+            'amount' => $weekPayment['amount'],
+            'payment_type_id' => $weekPaymentType['id'],
+            'account_id' => $this->id,
+            'available' => false,
+        ]);
+        $deposit->save();
+        $deposit->makeAvailable();
     }
 }

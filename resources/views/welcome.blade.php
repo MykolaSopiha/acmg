@@ -44,9 +44,8 @@
     </header>
 
     <main role="main" class="inner cover text-center">
-        <h1 class="cover-heading">Cover your page.</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the
-            text, and add your own fullscreen background photo to make it your own.</p>
+        <h1 class="cover-heading">Сдай свой аккаунт в аренду.</h1>
+        <p class="lead">Начни зарабатывать прямо сейчас сдав свой аакаунт от популярной социальной сети facebook.com в аренду.<br/>Для этого зарегестрируйся и следуй инструкциям.</p>
         <p class="lead">
             <a href="{{route('login')}}" class="btn btn-lg btn-primary">Начать зарабатывать</a>
         </p>

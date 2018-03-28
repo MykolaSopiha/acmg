@@ -11,6 +11,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = Auth::user()->notifications;
+        Auth::user()->unreadNotifications->markAsRead();
         return view('admin.notifications.index', compact('notifications'));
     }
 }

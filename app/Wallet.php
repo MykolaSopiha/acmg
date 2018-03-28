@@ -80,28 +80,56 @@ class Wallet extends Model
         return $result;
     }
 
+    /**
+     * Function returns string in money format from given money amount.
+     * Example, 1 234.56 USD.
+     *
+     * @param $value
+     * @return string
+     */
     public function moneyFormat($value)
     {
         return (number_format($value, $this->currency->decimal_digits, '.', ' ') . " " . $this->currency->code);
     }
 
+    /**
+     * Function returns money balance of the wallet in money format
+     *
+     * @return string
+     */
     public function getBalanceMoney()
     {
         return self::moneyFormat($this->balance);
     }
 
+    /**
+     * Function returns all withdrawn money form the wallet in money format
+     *
+     * @return string
+     */
     public function getWithdrawnMoney()
     {
         $value = self::getWithdrawnAmount();
         return self::moneyFormat($value);
     }
 
+    /**
+     * Function returns all deposited money on the wallet in money format
+     *
+     * @return string
+     */
     public function getDepositedMoney()
     {
         $value = self::getDepositedAmount();
         return self::moneyFormat($value);
     }
 
+
+    /**
+     * Function checks if all deposited money minus withdrawn money equals to current wallet balance
+     *
+     * @return bool
+     */
     public function checkBalance()
     {
         return $this->balance == (self::getDepositedAmount() - self::getWithdrawnAmount());

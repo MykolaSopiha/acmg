@@ -23,6 +23,7 @@
             <th scope="col">User</th>
             <th scope="col">Amount</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +38,11 @@
                     @else
                         <span>confirmed by <a href="{{ route('admin:users.view', $withdraw->inspector->id) }}">{{ $withdraw->inspector->name }}</a> at {{ $withdraw->confirmed_at }}</span>
                     @endif
+                </td>
+                <td>
+                    <a href="{{ route('admin:withdraws.view', $withdraw->id) }}">
+                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                    </a>
                 </td>
             </tr>
         @endforeach

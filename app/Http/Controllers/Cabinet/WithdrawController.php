@@ -23,25 +23,15 @@ class WithdrawController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'amount' => 'required|numeric|min:1',
-            'card_number' => 'required|numeric|digits:16',
-        ]);
-
         $walletBalance = Auth::user()->wallet->balance;
 
-        // todo: validation: withdraw amount must be less or equal to balance
-        Validator::make($request->all(), [
-            'amount' => [
-                'required|numeric|min:1',
-                function($attribute, $value, $fail) use ($walletBalance) {
-                    if ($value > $walletBalance) {
-                        return $fail($attribute.' is more that wallet balance.');
-                    }
-                },
-            ],
+        $this->validate($request, [
+            'amount' => 'required|numeric|min:1|max:' . $walletBalance,
             'card_number' => 'required|numeric|digits:16',
+        ], [
+            'max' => 'Вы можете заказать снятие средств на сумму не большье ' . $walletBalance . ' ' . Auth::user()->wallet->currency->code . '.',
         ]);
+
 
         $withdraw = new Withdraw();
         $withdraw->fill([

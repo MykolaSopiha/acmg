@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\User;
 use App\Account;
+use App\Withdraw;
 use App\Observers\UserObserver;
 use App\Observers\AccountObserver;
+use App\Observers\WithdrawObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Account::observe(AccountObserver::class);
+        Withdraw::observe(WithdrawObserver::class);
     }
 
     /**

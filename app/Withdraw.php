@@ -60,4 +60,9 @@ class Withdraw extends Model
 
         return false;
     }
+
+    public function isConfirmed()
+    {
+        return ($this->confirmed_at && $this->confirmed_by);
+    }
 }

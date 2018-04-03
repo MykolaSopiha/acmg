@@ -84,14 +84,12 @@
         </div>
 
         <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-            <label for="status">Status</label>
             @if ($account->isConfirmed())
-                <div class="form-group">
-                    confirmed by
-                    <a href="{{ route('admin:users.view', $account->confirmed_by) }}">{{ $account->inspector->name }}</a>
-                    at {{ $account->confirmed_at }}
-                </div>
+                Confirmed by
+                <a href="{{ route('admin:users.view', $account->confirmed_by) }}">{{ $account->inspector->name }}</a>
+                at {{ $account->confirmed_at }}
             @else
+                <label for="status">Status</label>
                 <select name="status" id="status" class="form-control" style="width: 100%;">
                     @foreach($statuses as $key => $val)
                         <option value="{{$key}}" {{($key == $account->status) ? "selected" : ""}}>{{$val}}</option>
@@ -121,11 +119,10 @@
         <div class="form-group text-center mt-5">
             @if (is_null($account->deleted_at))
                 <button type="submit" class="btn btn-success">Save</button>
-            @endif
-            <a href="{{ route('admin:accounts.index')}}" class="btn btn-primary">Back</a>
-            @if (!is_null($account->deleted_at))
+            @else
                 <a href="{{ route('admin:accounts.restore', $account->id) }}" class="btn btn-success">Restore</a>
             @endif
+            <a href="{{ route('admin:accounts.index')}}" class="btn btn-primary">Back</a>
         </div>
     </form>
     <!-- Form end -->

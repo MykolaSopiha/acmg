@@ -59,7 +59,8 @@ class AccountController extends Controller
         $account = Account::withTrashed()->findOrFail($id);
         $users = User::all();
         $managers = User::getManagers();
-        return view('admin.accounts.edit', compact('account', 'users', 'managers'));
+        $statuses = config('accounts.statuses');
+        return view('admin.accounts.edit', compact('account', 'users', 'managers', 'statuses'));
     }
 
     public function update(Request $request, $id)
@@ -71,15 +72,12 @@ class AccountController extends Controller
             'viewer_pass' => 'numeric|nullable',
         ]);
 
-        $data = [
-            'viewer_id' => $request['viewer_id'],
-            'viewer_pass' => $request['viewer_pass'],
-            'manager_id' => $request['manager_id'],
-            'comment' => $request['comment'],
-            'status' => $request['status'],
-        ];
+        $account = Account::findOrFail($id);
+        $account->update($request->all());
 
-        Account::findOrFail($id)->update($data);
+        if ($request['status'] == 3) {
+            $account->confirm();
+        }
 
         return back()->with(['success' => 'Account updated!']);
     }

@@ -54,6 +54,38 @@ class UsersController extends Controller
         return back()->with(['success' => 'User rights are detached!']);
     }
 
+    public function makeAdmin($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $adminRole = Role::where('name', 'admin')->first();
+        $userRole = Role::where('name', 'user')->first();
+
+        $user->syncRoles([$userRole, $adminRole]);
+
+        return back()->with(['success' => 'Admin rights are attached!']);
+    }
+
+    public function makeManager($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $managerRole = Role::where('name', 'manager')->first();
+        $userRole = Role::where('name', 'user')->first();
+
+        $user->syncRoles([$userRole, $managerRole]);
+
+        return back()->with(['success' => 'Manager rights are attached!']);
+    }
+
+    public function makeUser($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $userRole = Role::where('name', 'user')->first();
+
+        $user->syncRoles([$userRole]);
+
+        return back()->with(['success' => 'User rights are attached!']);
+    }
+
     public function delete($id)
     {
         User::findOrFail($id)->delete();

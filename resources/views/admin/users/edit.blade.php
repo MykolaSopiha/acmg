@@ -92,9 +92,9 @@
                     </button>
                 @endif
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Admin</a>
-                    <a class="dropdown-item" href="#">Manager</a>
-                    <a class="dropdown-item" href="#">User</a>
+                    <a class="dropdown-item" href="{{ route('admin:users.makeAdmin', $user->id) }}">Admin</a>
+                    <a class="dropdown-item" href="{{ route('admin:users.makeManager', $user->id) }}">Manager</a>
+                    <a class="dropdown-item" href="{{ route('admin:users.makeUser', $user->id) }}">User</a>
                 </div>
             </div>
         </div>

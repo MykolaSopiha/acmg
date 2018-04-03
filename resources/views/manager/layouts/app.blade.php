@@ -31,7 +31,7 @@
 
     <!-- Content BEGIN -->
     <div class="content-wrapper mx-0">
-        <div class="container">
+        <div class="container h-100">
             @yield('content')
         </div>
         <!-- /.container-fluid-->

@@ -38,9 +38,7 @@
                         {{$account->profile_id}}
                     </a>
                 </td>
-                <td>
-                    <a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a>
-                </td>
+                <td><a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a></td>
                 <td class="text-center">
                     @if ($account->viewer_id != '' && $account->viewer_pass != '')
                         <span class="text-success">
@@ -62,7 +60,7 @@
                         </button>
                     @else
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ $statuses[$account->status] }}
                             </button>

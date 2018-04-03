@@ -8,6 +8,7 @@ class Session extends Model
 {
     protected $fillable = [
         'account_id',
+        'manager_id',
         'timetable_id',
         'start',
         'end',
@@ -29,9 +30,10 @@ class Session extends Model
         return $this->belongsTo('App\User', 'manager_id', 'id');
     }
 
-    public function schedule()
+    public function timetable()
     {
-        return $this->belongsTo('App\Schedule');
+        return $this->belongsTo('App\Timetable');
     }
     // Relationships END
+
 }

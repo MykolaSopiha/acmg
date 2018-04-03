@@ -160,6 +160,15 @@ class Account extends Model
         ])->get();
     }
 
+    public static function getConfirmedManagedAccounts()
+    {
+        return self::where([
+            ['confirmed_by', '<>', null],
+            ['confirmed_at', '<>', null],
+            ['manager_id', '<>', null],
+        ])->get();
+    }
+
     /**
      * Function make week payment to user wallet if user's account is confirmed
      */

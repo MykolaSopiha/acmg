@@ -48,8 +48,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}', ['uses' => 'UsersController@view', 'as' => 'view']);
         Route::get('/{id}/edit', ['uses' => 'UsersController@edit', 'as' => 'edit']);
         Route::post('/{id}/update', ['uses' => 'UsersController@update', 'as' => 'update']);
-        Route::get('/{id}/admin', ['uses' => 'UsersController@attachAdminRole', 'as' => 'attachAdmin']);
-        Route::get('/{id}/user', ['uses' => 'UsersController@detachAdminRole', 'as' => 'detachAdmin']);
+        Route::get('/{id}/admin', ['uses' => 'UsersController@makeAdmin', 'as' => 'makeAdmin']);
+        Route::get('/{id}/manager', ['uses' => 'UsersController@makeManager', 'as' => 'makeManager']);
+        Route::get('/{id}/user', ['uses' => 'UsersController@makeUser', 'as' => 'makeUser']);
         Route::get('/{id}/delete', ['uses' => 'UsersController@delete', 'as' => 'delete']);
         Route::get('/{id}/accounts', ['uses' => 'UsersController@userAccounts', 'as' => 'accounts']);
         Route::get('/{id}/wallet', ['uses' => 'UsersController@userWallet', 'as' => 'wallet']);
@@ -131,6 +132,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
 
 Route::group(['prefix' => 'manager', 'as' => 'manager:', 'namespace' => 'Manager', 'middleware' => ['auth', 'role:manager']], function () {
     Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
+    Route::post('updateSession', ['uses' => 'DashboardController@updateSession', 'as' => 'updateSession']);
 });
 
 Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth', 'role:user']], function () {

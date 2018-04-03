@@ -28,6 +28,7 @@
             <th scope="col">Type</th>
             <th scope="col">Label</th>
             <th scope="col">Description</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -39,6 +40,11 @@
                 <td>{{$payment->paymentType->name}}</td>
                 <td>{{$payment->paymentType->label}}</td>
                 <td>{{$payment->paymentType->description}}</td>
+                <td>
+                    <a class="btn btn-link" href="{{ route('admin:payments.edit', $payment->id) }}">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </a>
+                </td>
             </tr>
         @endforeach
         </tbody>

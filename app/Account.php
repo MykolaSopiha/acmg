@@ -12,10 +12,10 @@ class Account extends Model
 
     protected $fillable = [
         'profile_id',
+        'manager_id',
         'user_id',
         'viewer_id',
         'viewer_pass',
-        'schedule',
         'comment',
         'status',
         'confirmed_by',
@@ -34,6 +34,11 @@ class Account extends Model
         return $this->hasMany('App\Session');
     }
 
+    public function timetable()
+    {
+        return $this->hasMany('App\Timetable');
+    }
+
     public function deposit()
     {
         return $this->hasMany('App\Deposit');
@@ -42,6 +47,11 @@ class Account extends Model
     public function inspector()
     {
         return $this->hasOne('App\User', 'id', 'confirmed_by');
+    }
+
+    public function manager()
+    {
+        return $this->hasOne('App\User', 'id', 'manager_id');
     }
     // Relationships END
 

@@ -24,6 +24,8 @@ Route::get('home', function () {
 
     if (Auth::user()->hasRole('admin')) {
         return redirect()->route('admin:dashboard');
+    } elseif (Auth::user()->hasRole('manager')) {
+        return redirect()->route('manager:dashboard');
     } elseif (Auth::user()->hasRole('user')) {
         return redirect()->route('cabinet:dashboard');
     }
@@ -60,6 +62,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/edit', ['uses' => 'AccountController@edit', 'as' => 'edit']);
         Route::post('/{id}/update', ['uses' => 'AccountController@update', 'as' => 'update']);
         Route::get('/{id}/delete', ['uses' => 'AccountController@delete', 'as' => 'delete']);
+        Route::get('/{id}/restore', ['uses' => 'AccountController@restore', 'as' => 'restore']);
         Route::get('/{id}/confirm', ['uses' => 'AccountController@accountConfirm', 'as' => 'confirm']);
         Route::get('/{id}/deposits', ['uses' => 'AccountController@accountDeposits', 'as' => 'deposits']);
         Route::get('/{id}/sessions', ['uses' => 'AccountController@accountSessions', 'as' => 'sessions']);
@@ -103,16 +106,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/delete', ['uses' => 'PaymentController@delete', 'as' => 'delete']);
     });
 
-//    Route::group(['prefix' => 'payment-types', 'as' => 'paymentTypes.'], function () {
-//        Route::get('/', ['uses' => 'PaymentTypeController@index', 'as' => 'index']);
-//        Route::get('/{id}', ['uses' => 'PaymentTypeController@view', 'as' => 'view']);
-//        Route::get('/create', ['uses' => 'PaymentTypeController@create', 'as' => 'create']);
-//        Route::post('/create', ['uses' => 'PaymentTypeController@store', 'as' => 'store']);
-//        Route::get('/{id}/edit', ['uses' => 'PaymentTypeController@edit', 'as' => 'edit']);
-//        Route::post('/{id}/update', ['uses' => 'PaymentTypeController@update', 'as' => 'update']);
-//        Route::get('/{id}/delete', ['uses' => 'PaymentTypeController@delete', 'as' => 'delete']);
-//    });
-
     Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
         Route::get('/', ['uses' => 'NotificationController@index', 'as' => 'index']);
     });
@@ -134,6 +127,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/delete', ['uses' => 'WithdrawController@delete', 'as' => 'delete']);
     });
 
+});
+
+Route::group(['prefix' => 'manager', 'as' => 'manager:', 'namespace' => 'Manager', 'middleware' => ['auth', 'role:manager']], function () {
+    Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 });
 
 Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth', 'role:user']], function () {

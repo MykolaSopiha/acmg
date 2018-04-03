@@ -43,10 +43,7 @@
                     @if (is_null($account->confirmed_at))
                         <a href="{{ route('admin:accounts.confirm', $account->id) }}" class="btn btn-success">confirm</a>
                     @else
-                        <span class="text-dark">
-                            confirmed
-                            {{--by <a href="{{ route('admin:users.view', $account->confirmed_by) }}">{{ $account->inspector->name }}</a> at {{ $account->confirmed_at }}--}}
-                        </span>
+                        <span class="text-dark">confirmed</span>
                     @endif
                 </td>
                 <td style="text-align: right;">

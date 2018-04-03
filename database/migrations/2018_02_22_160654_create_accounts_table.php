@@ -16,10 +16,10 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('profile_id')->unique();
+            $table->integer('manager_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->string('viewer_id')->nullable();
             $table->string('viewer_pass')->nullable();
-            $table->text('schedule')->nullable();
             $table->integer('status');
             $table->text('comment')->nullable();
             $table->integer('confirmed_by')->unsigned()->nullable();

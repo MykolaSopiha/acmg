@@ -29,7 +29,6 @@
             <th scope="col">User</th>
             <th scope="col">TV ID*</th>
             <th scope="col">TV Pass*</th>
-            <th scope="col">Schedule</th>
             <th scope="col">Status</th>
             <th></th>
         </tr>
@@ -41,16 +40,12 @@
                 <td>{{$account->user->name}}</td>
                 <td>{{$account->viewer_id}}</td>
                 <td>{{$account->viewer_pass}}</td>
-                <td>{{$account->schedule}}</td>
                 <td>
-                    {{$statuses[intval($account->status)]}}
+                    <span class="badge badge-secondary">{{$statuses[intval($account->status)]}}</span>
                 </td>
                 <td style="text-align: right;">
                     <a class="btn btn-link" href="{{route('admin:accounts.view', $account->id)}}">
                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
-                    </a>
-                    <a class="btn btn-link" href="{{route('admin:accounts.delete', $account->id)}}">
-                        <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                     </a>
                 </td>
             </tr>

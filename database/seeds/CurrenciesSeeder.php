@@ -579,7 +579,8 @@ class CurrenciesSeeder extends Seeder
                 "decimal_digits" => 2,
                 "rounding" => 0,
                 "code" => "KZT",
-                "name_plural" => "Kazakhstani tenges"
+                "name_plural" => "Kazakhstani tenges",
+                "country_id" => 4,
             ],
             "LBP" => [
                 "symbol" => "LB£",
@@ -822,7 +823,8 @@ class CurrenciesSeeder extends Seeder
                 "decimal_digits" => 2,
                 "rounding" => 0,
                 "code" => "PLN",
-                "name_plural" => "Polish zlotys"
+                "name_plural" => "Polish zlotys",
+                "country_id" => 5
             ],
             "PYG" => [
                 "symbol" => "₲",

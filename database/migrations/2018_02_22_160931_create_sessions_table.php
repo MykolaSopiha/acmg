@@ -16,9 +16,15 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->unsigned();
-            $table->integer('manager_id')->unsigned();
+            $table->integer('timetable_id')->unsigned();
             $table->timestamp('start');
             $table->timestamp('end');
+            $table->enum('status', [
+                'expect', //expect, hold, in processing
+                'success', //approve
+                'fail', //fail, the sale did not take place
+                'trash' // trash(double, spam, fraud)
+            ]);
             $table->text('comment');
             $table->timestamps();
         });

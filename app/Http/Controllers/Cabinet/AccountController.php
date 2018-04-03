@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cabinet;
 
+use App\Schedule;
 use Validator;
 use App\Account;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class AccountController extends Controller
 
     public function edit($id)
     {
-        $account = Account::findOrFail($id);
+        $account = Account::findOrFail($id)->load('timetable');
         return view('cabinet.accounts.edit', compact('account'));
     }
 
@@ -69,7 +70,10 @@ class AccountController extends Controller
             ],
             'viewer_id' => 'required|numeric|min:0',
             'viewer_pass' => 'required|numeric|min:0',
-            'schedule' => 'required'
+            'session_start.*' => [
+                'required',
+                'date_format:H:i'
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -79,7 +83,19 @@ class AccountController extends Controller
         $account = Account::findOrFail($id);
         $account->update($request->all());
 
-        return redirect()->route('cabinet:accounts.index');
+        $timetables = $account->timetable()->limit(2)->get();
+        $timetables->sortBy('id');
+
+        foreach ($timetables as $timetable) {
+            if ($timetable->isTimeCorrect($request->input('session_start')[$timetable->id])) {
+                $data = [
+                    'start_time' => $request->input('session_start')[$timetable->id]
+                ];
+                $timetable->update($data);
+            }
+        }
+
+        return redirect()->back();
     }
 
     public function timetable($id)

@@ -19,8 +19,6 @@
     <link href="{{asset('vendor/select2/css/select2.min.css')}}" rel="stylesheet">
     <!-- Select2 Bootstrap 4 Style CSS -->
     <link href="{{asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}" rel="stylesheet">
-    <!-- DateTimePicker -->
-    <link href="{{asset('vendor/jquery-datetimepicker/jquery.datetimepicker.min.css')}}">
     <!-- Custom styles for this template -->
     <link href="{{asset('css/sb-admin.css')}}" rel="stylesheet">
 </head>
@@ -28,17 +26,17 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
     <!-- Navigation BEGIN -->
-    @include('admin.layouts.navbar')
+    @include('manager.layouts.navbar')
     <!-- Navigation END -->
 
     <!-- Content BEGIN -->
-    <div class="content-wrapper">
-        <div class="container-fluid">
+    <div class="content-wrapper mx-0">
+        <div class="container">
             @yield('content')
         </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
-        <footer class="sticky-footer">
+        <footer class="sticky-footer w-100">
             <div class="container">
                 <div class="text-center">
                     <small>Copyright © {{ config('app.name') }} 2018</small>
@@ -79,19 +77,19 @@
     <!-- jQuery -->
     <script src={{asset("vendor/jquery/jquery.min.js")}}></script>
     <!-- jQuery UI -->
-    <script src={{asset("vendor/jquery/jquery.min.js")}}></script>
+    {{-- todo: add jQuery UI--}}
     <!-- Bootstrap core JavaScript-->
     <script src={{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
     <!-- Core plugin JavaScript-->
     <script src={{asset("js/jquery.easing.min.js")}}></script>
     <!-- Page level plugin JavaScript-->
+    <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
     <script src={{asset("vendor/datatables/js/jquery.dataTables.js")}}></script>
     <script src={{asset("vendor/datatables/js/dataTables.bootstrap4.js")}}></script>
     <!-- Select2-->
     <script src="{{asset("vendor/select2/js/select2.full.min.js")}}"></script>
-    <!-- DateTimePicker -->
-    <script src="{{asset('vendor/jquery-datetimepicker/jquery.datetimepicker.full.min.js')}}"></script>
     <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-charts.min.js')}}"></script>
     <script src="{{asset("js/sb-admin.min.js")}}"></script>
     <!-- Custom scripts for this site-->
     <script src="{{asset("js/app.js")}}"></script>

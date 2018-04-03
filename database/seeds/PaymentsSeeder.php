@@ -31,17 +31,17 @@ class PaymentsSeeder extends Seeder
         return [
             [
                 "country_id" => 1,
-                "amount" => 100, //100.00 UAH
+                "amount" => 100, // 100.00 UAH
                 "payment_type_id" => 1,
             ],
             [
                 "country_id" => 1,
-                "amount" => 100, //100.00 UAH
+                "amount" => 50, // 50.00 UAH
                 "payment_type_id" => 2,
             ],
             [
                 "country_id" => 1,
-                "amount" => 50, //50.00 UAH
+                "amount" => 20, // 20.00 UAH
                 "payment_type_id" => 3,
             ],
         ];

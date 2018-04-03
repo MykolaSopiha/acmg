@@ -24,7 +24,8 @@
 
         <div class="form-group{{ $errors->has('profile_id') ? ' has-error' : '' }}">
             <label for="profile_id">ID Аккаунта</label>
-            <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{$account->profile_id}}" placeholder=""
+            <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{$account->profile_id}}"
+                   placeholder=""
                    readonly>
             @if ($errors->has('profile_id'))
                 <p class="text-danger">{{ $errors->first('profile_id') }}</p>
@@ -49,19 +50,30 @@
             @endif
         </div>
 
-        <div class="form-group{{ $errors->has('schedule') ? ' has-error' : '' }}">
-            <label for="schedule">Рассписание</label>
-            <textarea cols="1000" rows="3" class="form-control" id="schedule" name="schedule" placeholder=""
-                      required>{{$account->schedule}}</textarea>
-            @if ($errors->has('schedule'))
-                <p class="text-danger">{{ $errors->first('schedule') }}</p>
-            @endif
-        </div>
+        @foreach($account->timetable as $timetable)
+            <div class="form-group{{ $errors->has('session_start.' . $timetable->id) ? ' has-error' : '' }}">
+                <label for="session_start[{{ $timetable->id }}]">
+                    Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }}
+                </label>
+                <input type="time" class="form-control" id="session_start[{{ $timetable->id }}]"
+                       name="session_start[{{ $timetable->id }}]" pattern="([01]?[0-9]{1}|2[0-3]{1}):[0-5]{1}[0-9]{1}"
+                       value="{{ substr($timetable->start_time, 0, strlen($timetable->start_time) - 3) }}"
+                       placeholder="">
+                @if ($errors->has('session_start.' . $timetable->id))
+                    <p class="text-danger">{{ $errors->first('session_start.' . $timetable->id) }}</p>
+                @endif
+            </div>
+        @endforeach
 
         <div class="form-group text-center mt-5">
             <button class="btn btn-success">Сохранить</button>
             <a class="btn btn-link" href="{{ route('cabinet:accounts.index') }}">Назад</a>
         </div>
+
+        <p class="text-muted">
+            Начало сессии #1 - с <strong>{{ config('accounts.sessions.first.start') }}</strong> до <strong>{{ config('accounts.sessions.first.end') }}</strong><br>
+            Начало сессии #2 - с <strong>{{ config('accounts.sessions.second.start') }}</strong> до <strong>{{ config('accounts.sessions.second.end') }}</strong><br>
+        </p>
     </form>
     <!-- Form end -->
 

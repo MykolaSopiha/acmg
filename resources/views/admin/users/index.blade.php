@@ -36,19 +36,21 @@
                 <td>
                     @if($user->hasRole('admin'))
                         <span class="badge badge-success">admin</span>
+                    @elseif($user->hasRole('manager'))
+                        <span class="badge badge-warning">manager</span>
                     @else
                         <span class="badge badge-primary">user</span>
                     @endif
                 </td>
                 <td style="text-align: center;">
-                    @if (!$user->hasRole('admin'))
+                    @if (!$user->hasRole('admin') && !$user->hasRole('manager'))
                         <a href="{{ route('admin:users.wallet', $user->id) }}">
                             {{ $user->wallet->getBalanceMoney() }}
                         </a>
                     @endif
                 </td>
                 <td style="text-align: right;">
-                    @if (!$user->hasRole('admin'))
+                    @if (!$user->hasRole('admin') && !$user->hasRole('manager'))
                         <a class="btn btn-link" href="{{ route('admin:users.accounts', $user->id) }}">
                             <i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>
                         </a>

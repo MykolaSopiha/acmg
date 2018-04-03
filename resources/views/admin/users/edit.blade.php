@@ -76,13 +76,31 @@
             </div>
         @endif
 
+        <div class="form-group">Set role:&nbsp;
+            <div class="btn-group">
+                @if ($user->hasRole('admin'))
+                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </button>
+                @elseif ($user->hasRole('manager'))
+                    <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manager
+                    </button>
+                @else
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                    </button>
+                @endif
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Admin</a>
+                    <a class="dropdown-item" href="#">Manager</a>
+                    <a class="dropdown-item" href="#">User</a>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Save</button>
-            @if ($user->hasRole('admin'))
-                <a href="{{route('admin:users.detachAdmin', $user->id)}}" class="btn btn-dark">Make User</a>
-            @else
-                <a href="{{route('admin:users.attachAdmin', $user->id)}}" class="btn btn-primary">Make Admin</a>
-            @endif
             <a href="{{route('admin:users.delete', $user->id)}}" class="btn btn-danger">Delete</a>
         </div>
 

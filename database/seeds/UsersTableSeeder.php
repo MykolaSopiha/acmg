@@ -24,20 +24,35 @@ class UsersTableSeeder extends Seeder
 
 
         $adminRole = Role::where('name', 'admin')->first();
+        $managerRole = Role::where('name', 'manager')->first();
         $userRole = Role::where('name', 'user')->first();
 
         $user->attachRole($adminRole);
         $user->attachRole($userRole);
 
+
+
         $user = new User();
         $user->name = 'user';
         $user->email = 'user@gmail.com';
         $user->password = Hash::make('123123');
-        $user->phone = '+380967368180';
+        $user->phone = '+380967368181';
         $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();
 
+        $user->attachRole($userRole);
+
+        $user = new User();
+        $user->name = 'manager';
+        $user->email = 'manager@gmail.com';
+        $user->password = Hash::make('123123');
+        $user->phone = '+380967368182';
+        $user->country_id = 1; // Ukraine ID = 1
+        $user->referer_key = str_random(10);
+        $user->save();
+
+        $user->attachRole($managerRole);
         $user->attachRole($userRole);
     }
 }

@@ -24,10 +24,9 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">User</th>
-            <th scope="col">TV ID*</th>
-            <th scope="col">TV Pass*</th>
-            <th scope="col">Schedule</th>
+            <th scope="col" class="text-center">Access</th>
             <th scope="col">Status</th>
+            <th scope="col">Manager</th>
             <th></th>
         </tr>
         </thead>
@@ -42,9 +41,18 @@
                 <td>
                     <a href="{{route('admin:users.view', $account->user->id)}}">{{$account->user->name}}</a>
                 </td>
-                <td>{{$account->viewer_id}}</td>
-                <td>{{$account->viewer_pass}}</td>
-                <td>{{$account->schedule}}</td>
+                <td class="text-center">
+                    @if ($account->viewer_id != '' && $account->viewer_pass != '')
+                        <span class="text-success">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        </span>
+                    @else
+                        <span class="text-secondary" data-toggle="tooltip" data-placement="bottom"
+                              title="'Team Viewer ID' and 'Team Viewer Pass' fields are empty!">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        </span>
+                    @endif
+                </td>
                 <td>
                     @if ($account->confirmed_at)
                         <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip"
@@ -67,9 +75,19 @@
                         </div>
                     @endif
                 </td>
+                <td style="vertical-align: middle">
+                    @if (is_null($account->manager))
+                        <p class="text-muted">nobody</p>
+                    @else
+                        <a class="btn btn-link" href="{{ route('admin:users.view', $account->manager->id) }}">{{ $account->manager->name }}</a>
+                    @endif
+                </td>
                 <td style="text-align: right;">
                     <a class="btn btn-link" href="{{route('admin:accounts.view', $account->id)}}">
                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-link" href="{{route('admin:accounts.edit', $account->id)}}">
+                        <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-link" href="{{route('admin:accounts.delete', $account->id)}}">
                         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>

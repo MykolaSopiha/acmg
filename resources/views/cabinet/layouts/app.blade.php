@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +10,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{url('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link href="{{url('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
-
     <!-- Select2 CSS -->
     <link href="{{url('vendor/select2/css/select2.min.css')}}" rel="stylesheet">
-
     <!-- Select2 Bootstrap 4 Style CSS -->
     <link href="{{url('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}" rel="stylesheet">
-
+    <!-- DateTimePicker -->
+    <link href="{{asset('vendor/jquery-datetimepicker/jquery.datetimepicker.min.css')}}">
     <!-- Custom styles for this template-->
     <link href="{{url('css/sb-admin.css')}}" rel="stylesheet">
 </head>
@@ -83,6 +80,8 @@
     <!-- Page level plugin JavaScript -->
     <script src={{url("vendor/datatables/js/jquery.dataTables.js")}}></script>
     <script src={{url("vendor/datatables/js/dataTables.bootstrap4.js")}}></script>
+    <!-- DateTimePicker -->
+    <script src="{{asset('vendor/jquery-datetimepicker/jquery.datetimepicker.full.min.js')}}"></script>
     <!-- Custom scripts for all pages -->
     <script src="{{url("js/sb-admin.min.js")}}"></script>
     <!-- Custom scripts for this site-->
@@ -106,6 +105,6 @@
 </div>
 <!-- Navigation END-->
 
+@stack('scripts')
 </body>
-
 </html>

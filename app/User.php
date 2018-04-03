@@ -115,6 +115,14 @@ class User extends Authenticatable
         })->get();
     }
 
+    public static function getManagers()
+    {
+        return User::whereHas('roles', function($q)
+        {
+            $q->where('name', 'manager');
+        })->get();
+    }
+
     public function getReferals()
     {
         return $this->where('parent_id', $this->id)->get();

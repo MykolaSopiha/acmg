@@ -40,14 +40,9 @@
             <input type="text" id="viewer_pass" class="form-control" value="{{$account->viewer_pass}}" readonly>
         </div>
 
-        <div class="form-group{{ $errors->has('schedule') ? ' has-error' : '' }}">
-            <label for="schedule">Schedule</label>
-            <textarea cols="1000" rows="3" class="form-control" id="schedule" readonly>{{$account->schedule}}</textarea>
-        </div>
-
         <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
             <label for="comment">Comment</label>
-            <textarea cols="1000" rows="3" class="form-control" id="comment" readonly>{{$account->comment}}</textarea>
+            <textarea cols="1000" rows="2" class="form-control" id="comment" readonly>{{$account->comment}}</textarea>
         </div>
 
         <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
@@ -63,11 +58,22 @@
             </div>
         @endif
 
+        @foreach($account->timetable as $timetable)
+            <div class="form-group">
+                <label for="session_start[{{ $timetable->id }}]">
+                    Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }}
+                </label>
+                <input type="time" class="form-control" id="session_start[{{ $timetable->id }}]"
+                       value="{{ substr($timetable->start_time, 0, strlen($timetable->start_time) - 3) }}"
+                       readonly>
+            </div>
+        @endforeach
+
         <div class="form-group text-center mt-5">
-            <button class="btn btn-success">Save</button>
+            <a href="{{ route('admin:accounts.index') }}" class="btn btn-primary">Back</a>
             <a href="{{route('admin:accounts.edit', $account->id)}}" class="btn btn-warning">Edit</a>
-            @if (!$account->isConfirmed())
-                <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-primary">Confirm</a>
+            @if (!$account->isConfirmed() && !is_null($account->deteted_at))
+                <a href="{{route('admin:accounts.confirm', $account->id)}}" class="btn btn-success">Confirm</a>
             @endif
         </div>
     </form>

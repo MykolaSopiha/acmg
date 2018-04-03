@@ -58,23 +58,23 @@ class AccountController extends Controller
     {
         $account = Account::withTrashed()->findOrFail($id);
         $users = User::all();
-        return view('admin.accounts.edit', compact('account', 'users'));
+        $managers = User::getManagers();
+        return view('admin.accounts.edit', compact('account', 'users', 'managers'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'profile_id' => 'required|numeric',
-            'viewer_id' => 'required|numeric',
-            'viewer_pass' => 'required|numeric',
-            'schedule' => 'required',
+            'manager_id' => 'numeric|exists:users,id',
+            'viewer_id' => 'numeric|nullable',
+            'viewer_pass' => 'numeric|nullable',
         ]);
 
         $data = [
-            'url' => $request['url'],
             'viewer_id' => $request['viewer_id'],
             'viewer_pass' => $request['viewer_pass'],
-            'schedule' => $request['schedule'],
+            'manager_id' => $request['manager_id'],
             'comment' => $request['comment'],
             'status' => $request['status'],
         ];
@@ -86,8 +86,14 @@ class AccountController extends Controller
 
     public function delete($id)
     {
-        Account::find($id)->delete();
+        Account::findOrFail($id)->delete();
         return back()->with(['success' => 'Account deleted!']);
+    }
+
+    public function restore($id)
+    {
+        Account::withTrashed()->findOrFail($id)->restore();
+        return back()->with(['success' => 'Account restored!']);
     }
 
     public function trashList()

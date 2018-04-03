@@ -122,8 +122,6 @@ $(document).ready(function () {
         return event.charCode >= 48 && event.charCode <= 57;
     });
 
-    $('[data-toggle="popover"]').popover();
-
     $('.btn-confirm-account').click(function (e) {
         e.preventDefault();
         var confirmLink = $(this).data('link');

@@ -35,9 +35,17 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src={{url("vendor/jquery/jquery.min.js")}}></script>
-    <script src={{url("vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
-    <script src="{{url("js/app.js")}}"></script>
+    <script src={{asset("vendor/jquery/jquery.min.js")}}></script>
+    <script src={{asset("vendor/select2/js/select2.full.min.js")}}></script>
+    <script>
+        $(document).ready(function () {
+            $.fn.select2.defaults.set( "theme", "bootstrap4" );
+
+            $('.js-select').each(function (index, element) {
+                $(element).select2();
+            });
+        });
+    </script>
     @stack('scripts')
 
 </body>

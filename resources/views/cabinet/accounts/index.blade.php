@@ -41,7 +41,6 @@
             <thead>
             <tr>
                 <th scope="col">id</th>
-                <th scope="col">Рассписание</th>
                 <th scope="col" class="text-center">Доступ</th>
                 <th scope="col">Статус</th>
                 <th scope="col" class="text-right">Настройки</th>
@@ -55,13 +54,10 @@
                             {{$account->profile_id}}
                         </a>
                     </td>
-                    <td>{{$account->schedule}}</td>
                     <td class="text-center">
-                        @if ($account->viewer_id != '' && $account->viewer_pass != '')
-                            <span class="text-success"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        @else
-                            <span class="text-secondary"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                        @endif
+                        <span class="text-{{ ($account->viewer_id != '' && $account->viewer_pass != '') ? "success" : "secondary" }}">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        </span>
                     </td>
                     <td>
                         <span class="badge badge-primary">{{config('accounts.statuses_ru')[$account->status]}}</span>
@@ -70,9 +66,6 @@
                         <a class="btn btn-link" href="{{route('cabinet:accounts.edit', $account->id)}}">
                             <i class="fa fa-cog" aria-hidden="true"></i>
                         </a>
-                        {{--<a class="btn btn-link" href="{{route('cabinet:accounts.delete', $account->id)}}">--}}
-                            {{--<i class="fa fa-trash fa-lg" aria-hidden="true"></i>--}}
-                        {{--</a>--}}
                     </td>
                 </tr>
             @endforeach

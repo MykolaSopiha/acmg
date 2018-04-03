@@ -26,19 +26,19 @@ class PaymentTypesSeeder extends Seeder
     {
         return [
             [
-                "name" => "Account confirmed",
-                "description" => "Account has been tested and is suitable for use",
+                "name" => "Account confirmation",
+                "description" => "Account has been tested and is suitable for use.",
                 "label" => "valid",
-            ],
-            [
-                "name" => "Weekly payout",
-                "description" => "Weekly payment for the account that has been tested for suitability for use for promotional purposes",
-                "label" => "week",
             ],
             [
                 "name" => "Referral account",
                 "description" => "Payment for passing the check of the referral account",
-                "label" => "ref",
+                "label" => "referal",
+            ],
+            [
+                "name" => "Payment per session",
+                "description" => "One-time payment for each successful session.",
+                "label" => "session",
             ],
         ];
     }

@@ -130,12 +130,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
 
 });
 
+
 Route::group(['prefix' => 'manager', 'as' => 'manager:', 'namespace' => 'Manager', 'middleware' => ['auth', 'role:manager']], function () {
     Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
     Route::post('updateSession', ['uses' => 'DashboardController@updateSession', 'as' => 'updateSession']);
+
+
+    Route::get('profile', ['uses' => 'UserController@index', 'as' => 'user.view']);
+    Route::post('profile', ['uses' => 'UserController@update', 'as' => 'user.update']);
+    Route::get('reset-pass', ['uses' => 'UserController@passwordChange', 'as' => 'password.change']);
+    Route::post('reset-pass', ['uses' => 'UserController@passwordSave', 'as' => 'password.save']);
 });
 
-Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'Cabinet', 'middleware' => ['auth', 'role:user']], function () {
+
+Route::group(['prefix' => 'cabinet', 'as' => 'cabinet:', 'namespace' => 'User', 'middleware' => ['auth', 'role:user']], function () {
 
     Route::get('home', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 

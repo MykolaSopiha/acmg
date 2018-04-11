@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('full_name')->nullable();
+            $table->string('timezone');
             $table->string('skype')->nullable();
             $table->string('phone');
             $table->integer('country_id')->unsigned();

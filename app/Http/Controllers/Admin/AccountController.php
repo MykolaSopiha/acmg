@@ -19,7 +19,7 @@ class AccountController extends Controller
 
     public function index()
     {
-        $accounts = Account::all();
+        $accounts = Account::orderBy('id', 'desc')->paginate(10);
         return view('admin.accounts.index', compact('accounts'));
     }
 
@@ -79,7 +79,7 @@ class AccountController extends Controller
             $account->confirm();
         }
 
-        return back()->with(['success' => 'Account updated!']);
+        return redirect()->route('admin:accounts.index')->with(['success' => 'Account updated!']);
     }
 
     public function delete($id)

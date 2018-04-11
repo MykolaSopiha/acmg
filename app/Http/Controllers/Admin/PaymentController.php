@@ -23,7 +23,7 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'amount' => 'required|number|min:0'
+            'amount' => 'required|numeric|min:0'
         ]);
 
         $payment = Payment::findOrFail($id);

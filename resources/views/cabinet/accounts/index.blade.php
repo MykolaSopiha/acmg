@@ -20,21 +20,23 @@
         </header>
 
         <!-- Form begin -->
-        <form action="{{route('cabinet:accounts.create')}}" method="POST" class="form-inline mb-3">
+        <form action="{{route('cabinet:accounts.create')}}" method="POST" class="form-inline mb-3 align-items-start">
             {!! csrf_field() !!}
             <div class="form-group mr-3 mb-2 {{ $errors->has('profile_id') ? 'has-error' : '' }}">
                 <label for="profile_id" class="sr-only">Profile ID</label>
-                <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{old('profile_id')}}"
-                       placeholder="ID вашего аккаунта" required>
-                @if ($errors->has('profile_id'))
-                    <p class="text-danger">{{ $errors->first('profile_id') }}</p>
-                @endif
+                <div>
+                    <input type="text" class="form-control" id="profile_id" name="profile_id" value="{{old('profile_id')}}"
+                           placeholder="ID вашего аккаунта" required>
+                    @if ($errors->has('profile_id'))
+                        <p class="text-danger">{{ $errors->first('profile_id') }}</p>
+                    @endif
+                </div>
             </div>
             <button type="submit" class="btn btn-primary mb-2">Добавить</button>
         </form>
         <p class="text-muted">Если Вы не знаете как получить ID Вашего аккаунта в Facebook воспользуйтесь этим <a
                     href="https://findmyfbid.com/" target="_blank">сервисом</a></p>
-        <!-- Form begin -->
+        <!-- Form end -->
 
         <div class="table-responsive">
             <table class="table">

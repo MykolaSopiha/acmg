@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Database\Eloquent\Model;
 
 class Timetable extends Model
@@ -10,8 +13,7 @@ class Timetable extends Model
     protected $fillable = [
         'account_id',
         'start_time',
-        'earliest_time',
-        'latest_time',
+        'user_changes',
         'days'
     ];
 
@@ -27,6 +29,31 @@ class Timetable extends Model
         return $this->hasOne('App\Session');
     }
     // Relationships END
+
+
+    // Mutators BEGIN
+    public function convertTimeZone($value, $primaryTz, $finalTz)
+    {
+        $schedule_date = new DateTime($value, new DateTimeZone($primaryTz) );
+        return $schedule_date->setTimeZone(new DateTimeZone($finalTz));
+    }
+
+    public function getStartTimeAttribute($value)
+    {
+        if (is_null($value)) {
+            return null;
+        }
+
+        $userTz = $this->account->user->timezone;
+        return self::convertTimeZone($value, 'UTC', $userTz)->format('H:i');
+    }
+
+    public function setStartTimeAttribute($value)
+    {
+        $userTz = $this->account->user->timezone;
+        $this->attributes['start_time'] = self::convertTimeZone($value, $userTz, 'UTC')->format('H:i');
+    }
+    // Mutators END
 
 
     public function isTimeCorrect($value)
@@ -69,21 +96,40 @@ class Timetable extends Model
         return false;
     }
 
-    public function isMissed()
+    public function isFirst()
     {
-        $currTime = date('h:i');
-        $currTimeParts = explode(':', $currTime);
+        $timetable = self::orderBy('account_id','asc')
+            ->where('account_id', $this->account_id)
+            ->first();
 
-        $currHour = $currTimeParts[0];
-        $currMinute = $currTimeParts[1];
 
-        $latest_hh = explode(':', $this->latest_time)[0];
-        $latest_mm = explode(':', $this->latest_time)[1];
-
-        if ($currHour > $latest_hh || ($currHour == $latest_hh && $currMinute > $latest_mm)) {
+        if ($timetable['id'] == $this->id) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
+    }
+
+    public function isSecond()
+    {
+        $timetables = self::orderBy('account_id','asc')
+            ->where('account_id', $this->account_id)
+            ->limit(2)
+            ->get();
+
+
+        if ($timetables[1]['id'] == $this->id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isReadyToUserUpdate()
+    {
+        if (config('accounts.user_change_limit') > $this->user_changes && $this->updated_at > Carbon::now()->subDay())
+            return true;
+
+        return false;
     }
 }

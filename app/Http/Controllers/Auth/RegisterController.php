@@ -7,6 +7,8 @@ use App\Notifications\NewUser;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -44,8 +46,48 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+        static $regions = array(
+//            DateTimeZone::AFRICA,
+//            DateTimeZone::AMERICA,
+//            DateTimeZone::ANTARCTICA,
+            DateTimeZone::ASIA,
+//            DateTimeZone::ATLANTIC,
+//            DateTimeZone::AUSTRALIA,
+            DateTimeZone::EUROPE,
+//            DateTimeZone::INDIAN,
+//            DateTimeZone::PACIFIC,
+        );
+
+        $timezones = array();
+        foreach( $regions as $region )
+        {
+            $timezones = array_merge( $timezones, DateTimeZone::listIdentifiers( $region ) );
+        }
+
+        $timezone_offsets = array();
+        foreach( $timezones as $timezone )
+        {
+            $tz = new DateTimeZone($timezone);
+            $timezone_offsets[$timezone] = $tz->getOffset(new DateTime);
+        }
+
+        // sort timezone by offset
+        asort($timezone_offsets);
+
+        $timezone_list = array();
+        foreach( $timezone_offsets as $timezone => $offset )
+        {
+            $offset_prefix = $offset < 0 ? '-' : '+';
+            $offset_formatted = gmdate( 'H:i', abs($offset) );
+
+            $pretty_offset = "UTC${offset_prefix}${offset_formatted}";
+
+            $timezone_list[$timezone] = "(${pretty_offset}) $timezone";
+        }
+
         $countries = Country::all();
-        return view('auth.register', compact('countries'));
+
+        return view('auth.register', compact('countries', 'timezone_list'));
     }
 
     /**
@@ -65,6 +107,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'country_id' => 'required|numeric|exists:countries,id',
             'phone' => 'required|numeric|unique:users',
+            'timezone' => 'required|timezone'
         ]);
     }
 
@@ -100,6 +143,7 @@ class RegisterController extends Controller
             'referer_key' => $refererKey,
             'country_id' => $data['country_id'],
             'phone' => $data['phone'],
+            'timezone' => $data['timezone'],
         ]);
         $user->save();
 

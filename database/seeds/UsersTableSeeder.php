@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'admin@gmail.com';
         $user->password = Hash::make('123123');
         $user->phone = '+380967368180';
+        $user->timezone = 'Europe/Kiev';
         $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();
@@ -37,6 +38,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'user@gmail.com';
         $user->password = Hash::make('123123');
         $user->phone = '+380967368181';
+        $user->timezone = 'Europe/Kiev';
         $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();
@@ -48,6 +50,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'manager@gmail.com';
         $user->password = Hash::make('123123');
         $user->phone = '+380967368182';
+        $user->timezone = 'Europe/Kiev';
         $user->country_id = 1; // Ukraine ID = 1
         $user->referer_key = str_random(10);
         $user->save();

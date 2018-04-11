@@ -51,7 +51,7 @@
         </ul>
         <ul class="navbar-nav d-flex flex-row justify-content-around">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin:user.view')}}">
+                <a class="nav-link" href="{{route('manager:user.view')}}">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Profile
                 </a>
             </li>

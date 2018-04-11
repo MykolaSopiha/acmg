@@ -96,6 +96,8 @@
         </tbody>
     </table>
 
+    {{ $accounts->links() }}
+
     <p class="text-secondary">*TV - Team Viewer</p>
 
     {{--@include('admin.partials.modals.account_confirmation')--}}

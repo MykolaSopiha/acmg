@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'skype',
         'phone',
+        'timezone',
         'parent_id',
         'referer_key',
     ];

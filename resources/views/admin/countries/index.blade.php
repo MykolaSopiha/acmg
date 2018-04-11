@@ -23,6 +23,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Currency</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
             <tr>
                 <td>{{$country->id}}</td>
                 <td>{{$country->name}}</td>
+                <td>{{$country->currency->code}}</td>
             </tr>
         @endforeach
         </tbody>

@@ -52,13 +52,29 @@
 
         @foreach($account->timetable as $timetable)
             <div class="form-group{{ $errors->has('session_start.' . $timetable->id) ? ' has-error' : '' }}">
-                <label for="session_start[{{ $timetable->id }}]">
-                    Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }}
-                </label>
+                <div class="d-flex justify-content-between">
+                    <label for="session_start[{{ $timetable->id }}]">
+                        Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }}
+                        @if ($timetable->isFirst())
+                            (с <strong>{{ config('accounts.sessions.first.start') }}</strong> до
+                            <strong>{{ config('accounts.sessions.first.end') }}</strong>)
+                        @elseif($timetable->isSecond())
+                            (с <strong>{{ config('accounts.sessions.second.start') }}</strong> до
+                            <strong>{{ config('accounts.sessions.second.end') }}</strong>)
+                        @endif
+                    </label>
+
+                    @if($timetable->created_at != $timetable->updated_at)
+                        <span class="text-success">
+                            лимит изменений: {{ config('accounts.user_change_limit') - $timetable->user_changes }}
+                        </span>
+                    @endif
+                </div>
+
                 <input type="time" class="form-control" id="session_start[{{ $timetable->id }}]"
                        name="session_start[{{ $timetable->id }}]" pattern="([01]?[0-9]{1}|2[0-3]{1}):[0-5]{1}[0-9]{1}"
-                       value="{{ substr($timetable->start_time, 0, strlen($timetable->start_time) - 3) }}"
-                       placeholder="">
+                       value="{{ $timetable->start_time }}" placeholder="00:00"
+                       {{(config('accounts.user_change_limit') <= $timetable->user_changes) ? "readonly" : ""}}>
                 @if ($errors->has('session_start.' . $timetable->id))
                     <p class="text-danger">{{ $errors->first('session_start.' . $timetable->id) }}</p>
                 @endif
@@ -69,11 +85,6 @@
             <button class="btn btn-success">Сохранить</button>
             <a class="btn btn-link" href="{{ route('cabinet:accounts.index') }}">Назад</a>
         </div>
-
-        <p class="text-muted">
-            Начало сессии #1 - с <strong>{{ config('accounts.sessions.first.start') }}</strong> до <strong>{{ config('accounts.sessions.first.end') }}</strong><br>
-            Начало сессии #2 - с <strong>{{ config('accounts.sessions.second.start') }}</strong> до <strong>{{ config('accounts.sessions.second.end') }}</strong><br>
-        </p>
     </form>
     <!-- Form end -->
 

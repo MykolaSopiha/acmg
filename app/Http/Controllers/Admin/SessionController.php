@@ -13,16 +13,16 @@ class SessionController extends Controller
 {
     public function index()
     {
-        $sessions = Session::all();
+        $sessions = Session::orderBy('id','desc')->paginate(10);
         return view('admin.sessions.index', compact('sessions'));
     }
 
     public function create()
     {
-        $users = User::all();
-        $accounts = Account::all();
+        $accounts = Account::select('id', 'profile_id')->get();
+        $managers = User::getManagers();
 
-        return view('admin.sessions.create', compact('users', 'accounts'));
+        return view('admin.sessions.create', compact('accounts', 'managers'));
     }
 
     public function store(Request $request)
@@ -46,6 +46,12 @@ class SessionController extends Controller
         $session->save();
 
         return back()->with(['success' => 'Session created!']);
+    }
+
+    public function view($id)
+    {
+        $session = Session::findOrFail($id);
+        return view('admin.sessions.view', compact('session'));
     }
 
     public function edit($id)

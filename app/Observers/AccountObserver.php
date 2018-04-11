@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use App\Account;
 use App\Notifications\AccountAdded;
+use Illuminate\Support\Facades\Artisan;
 
 class AccountObserver
 {
@@ -20,8 +21,6 @@ class AccountObserver
             'account_id' => $account->id,
             'time' => null,
             'days' => 0b1111111, // days of week
-            'earliest_time' => config('accounts.sessions.first.start'),
-            'latest_time' => config('accounts.sessions.first.end'),
         ];
 
         $schedule = new Timetable();
@@ -31,13 +30,18 @@ class AccountObserver
         $data = [
             'account_id' => $account->id,
             'time' => null,
-            'days' => 0b1111111,
-            'earliest_time' => config('accounts.sessions.second.start'),
-            'latest_time' => config('accounts.sessions.second.end'),
+            'days' => 0b1111111
         ];
 
         $schedule = new Timetable();
         $schedule->fill($data);
         $schedule->save();
+    }
+
+    public function updating(Account $account)
+    {
+        $new_account = $account->getDirty();
+
+        Artisan::call('update:hourly');
     }
 }

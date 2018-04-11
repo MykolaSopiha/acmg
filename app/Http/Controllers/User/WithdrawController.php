@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet;
+namespace App\Http\Controllers\User;
 
 use App\Withdraw;
 use Illuminate\Http\Request;

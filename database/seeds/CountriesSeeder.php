@@ -45,12 +45,7 @@ class CountriesSeeder extends Seeder
                 "country_code" => "KZ",
                 "country_name" => "Kazakhstan",
                 "dialling_code" => "+7"
-            ],
-            [
-                "country_code" => "PL",
-                "country_name" => "Poland",
-                "dialling_code" => "+48"
-            ],
+            ]
         ];
     }
 }

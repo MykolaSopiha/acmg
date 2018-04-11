@@ -16,10 +16,9 @@ class CreateTimetablesTable extends Migration
         Schema::create('timetables', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->unsigned();
-            $table->time('start_time')->nullable();
-            $table->time('earliest_time')->nullable();
-            $table->time('latest_time')->nullable();
+            $table->timeTz('start_time')->nullable();
             $table->binary('days', 1);
+            $table->integer('user_changes')->unsigned()->default(0);
             $table->timestamps();
         });
     }

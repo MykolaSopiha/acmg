@@ -35,6 +35,21 @@
             @endif
         </div>
 
+        <div class="form-group{{ $errors->has('manager_id') ? ' has-error' : '' }}">
+            <label for="manager">Manager</label>
+            <select name="manager_id" class="js-select" id="manager" style="width: 100%;">
+                <option value=""></option>
+                @foreach($managers as $manager)
+                    <option value="{{$manager->id}}" {{(old('account_id') == $manager->id) ? "selected" : ""}}>{{$manager->name}}</option>
+                @endforeach
+            </select>
+            @if ($errors->has('account_id'))
+                <p class="text-danger">{{ $errors->first('account_id') }}</p>
+            @endif
+        </div>
+
+
+
         <div class="form-group{{ $errors->has('start') ? ' has-error' : '' }}">
             <label for="start">Start</label>
             <input class="form-control js-datatime-picker" type="text" id="start" name="start" value="{{old('start')}}" placeholder="" required/>

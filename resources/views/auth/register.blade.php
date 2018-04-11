@@ -57,23 +57,44 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
-                                    <label for="country">Страна</label>
-                                    <select id="country" class="form-control js-select" name="country_id"
-                                            data-placeholder="Выберите страну">
-                                        <option value=""></option>
-                                        @foreach($countries as $country)
-                                            <option value="{{$country->id}}"
-                                                    data-phone="{{$country->phone}}" {{($country->id == old('country_id') ? 'selected' : '')}}>
-                                                {{$country->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('country_id'))
-                                        <p class="help-block">
-                                            <strong>{{ $errors->first('country_id') }}</strong>
-                                        </p>
-                                    @endif
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
+                                            <label for="country">Страна</label>
+                                            <select id="country" class="form-control js-select" name="country_id"
+                                                    data-placeholder="Выберите страну">
+                                                <option value=""></option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country->id}}"
+                                                            data-phone="{{$country->phone}}" {{($country->id == old('country_id') ? 'selected' : '')}}>
+                                                        {{$country->name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('country_id'))
+                                                <p class="help-block">
+                                                    <strong>{{ $errors->first('country_id') }}</strong>
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('timezone') ? ' has-error' : '' }}">
+                                            <label for="timezone">Временная зона</label>
+                                            <select id="timezone" class="form-control js-select" name="timezone"
+                                                    data-placeholder="Выберите временную зону">
+                                                <option value=""></option>
+                                                @foreach($timezone_list as $key => $val)
+                                                    <option value="{{ $key }}">{{ $val }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('timezone'))
+                                                <p class="help-block">
+                                                    <strong>{{ $errors->first('timezone') }}</strong>
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">

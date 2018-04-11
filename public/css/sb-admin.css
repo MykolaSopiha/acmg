@@ -482,3 +482,6 @@ footer.sticky-footer {
  .help-block {
    color: #ff0000;
  }
+.pagination li {
+  padding: 10px;
+}

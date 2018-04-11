@@ -16,15 +16,18 @@ return [
         'подтвержден',
     ],
 
+    // UTC Time
     'sessions' => [
         'first' => [
-            'start' => '8:00',
+            'start' => '08:00',
             'end' => '12:00',
         ],
         'second' => [
             'start' => '18:00',
-            'end' => '21:00',
+            'end' => '22:00',
         ]
-    ]
+    ],
+
+    'user_change_limit' => 2,
 
 ];

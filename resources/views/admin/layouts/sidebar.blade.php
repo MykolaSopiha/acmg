@@ -21,12 +21,12 @@
         </a>
     </li>
 
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-        <a class="nav-link" href="{{route('admin:currencies.index')}}">
-            <i class="fa fa-usd" aria-hidden="true"></i>
-            <span class="nav-link-text">Currencies</span>
-        </a>
-    </li>
+    {{--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">--}}
+        {{--<a class="nav-link" href="{{route('admin:currencies.index')}}">--}}
+            {{--<i class="fa fa-usd" aria-hidden="true"></i>--}}
+            {{--<span class="nav-link-text">Currencies</span>--}}
+        {{--</a>--}}
+    {{--</li>--}}
 
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
         <a class="nav-link active" href="{{route('admin:payments.index')}}">

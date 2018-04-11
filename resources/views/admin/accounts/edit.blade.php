@@ -104,11 +104,13 @@
         @foreach($account->timetable as $timetable)
             <div class="form-group{{ $errors->has('session_start.' . $timetable->id) ? ' has-error' : '' }}">
                 <label for="session_start[{{ $timetable->id }}]">
-                    Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }}
+                    Начало сессии #{{ $timetable->id - $account->timetable[0]->id + 1 }} (с
+                    <strong>{{ $timetable->earliest_time }}</strong> до
+                    <strong>{{ $timetable->latest_time }}</strong>)
                 </label>
                 <input type="time" class="form-control" id="session_start[{{ $timetable->id }}]"
                        name="session_start[{{ $timetable->id }}]" pattern="([01]?[0-9]{1}|2[0-3]{1}):[0-5]{1}[0-9]{1}"
-                       value="{{ substr($timetable->start_time, 0, strlen($timetable->start_time) - 3) }}"
+                       value="{{ $timetable->start_time }}"
                        placeholder="">
                 @if ($errors->has('session_start.' . $timetable->id))
                     <p class="text-danger">{{ $errors->first('session_start.' . $timetable->id) }}</p>

@@ -31,6 +31,7 @@
 <!-- Navigation BEGIN-->
 <div class="content-wrapper">
     <div class="container-fluid">
+        @include('cabinet.layouts.alerts')
         @yield('content')
     </div>
     <!-- /.container-fluid-->

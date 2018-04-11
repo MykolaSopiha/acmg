@@ -32,6 +32,7 @@
     <!-- Content BEGIN -->
     <div class="content-wrapper mx-0">
         <div class="container h-100">
+            @include('manager.layouts.alerts')
             @yield('content')
         </div>
         <!-- /.container-fluid-->

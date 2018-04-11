@@ -12,7 +12,8 @@ class Wallet extends Model
     protected $fillable = [
         'user_id',
         'balance',
-        'currency_id'
+        'currency_id',
+        'locked'
     ];
 
 
@@ -133,5 +134,15 @@ class Wallet extends Model
     public function checkBalance()
     {
         return $this->balance == (self::getDepositedAmount() - self::getWithdrawnAmount());
+    }
+
+    public function lock()
+    {
+        return $this->update(['locked' => true]);
+    }
+
+    public function unlock()
+    {
+        return $this->update(['locked' => false]);
     }
 }

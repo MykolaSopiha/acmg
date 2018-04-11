@@ -18,6 +18,7 @@ class CreateWalletsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->bigInteger('balance')->unsigned();
             $table->integer('currency_id')->unsigned();
+            $table->boolean('locked')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

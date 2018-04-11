@@ -2,6 +2,7 @@
 
 return [
 
+    // Account statuses
     'statuses' => [
         'new',
         'expected',
@@ -16,7 +17,7 @@ return [
         'подтвержден',
     ],
 
-    // UTC Time
+    // Session limits (UTC Time)
     'sessions' => [
         'first' => [
             'start' => '08:00',
@@ -28,6 +29,15 @@ return [
         ]
     ],
 
+    // Maximum times for user change its account timetable
     'user_change_limit' => 2,
+
+    // Minimum amount for withdraw per country
+    'min_withdraw' => [
+        'RU' => '100',
+        'UA' => '200',
+        'KZ' => '1000',
+        'BY' => '1000',
+    ]
 
 ];

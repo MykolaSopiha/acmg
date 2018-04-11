@@ -104,4 +104,16 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         return view('admin.users.wallet', compact('user', 'deposits', 'withdraws'));
     }
+
+    public function lockWallet($id)
+    {
+        $user = User::findOrFail($id)->wallet->lock();
+        return back()->with(['success' => 'Wallet locked!']);
+    }
+
+    public function unlockWallet($id)
+    {
+        $user = User::findOrFail($id)->wallet->unlock();
+        return back()->with(['success' => 'Wallet unlocked!']);
+    }
 }

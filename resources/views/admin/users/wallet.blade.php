@@ -19,8 +19,22 @@
 
     <div class="jumbotron jumbotron-fluid mb-5">
         <div class="container">
-            <h1 class="display-4">
-                Balance: {{number_format($user->wallet->balance, 2, '.', ' ')." ".$user->wallet->currency->code}}</h1>
+            <h1 class="display-4 d-flex justify-content-between">
+                <div>
+                    Balance: {{number_format($user->wallet->balance, 2, '.', ' ')." ".$user->wallet->currency->code}}
+                </div>
+                <div>
+                    @if($user->wallet->locked)
+                        <a href="{{ route('admin:users.unlockWallet', $user->id) }}" title="Wallet is locked">
+                            <i class="fa fa-unlock" aria-hidden="true"></i>
+                        </a>
+                    @else
+                        <a href="{{ route('admin:users.lockWallet', $user->id) }}" title="Wallet is locked">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </a>
+                    @endif
+                </div>
+            </h1>
         </div>
     </div>
 

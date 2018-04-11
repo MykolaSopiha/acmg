@@ -10,13 +10,10 @@ class SessionObserver
 {
     public function updating(Session $session)
     {
-        $new_session = $session->getDirty();
-
         if (
-            $new_session['status'] == 'success' &&
-            $session->status != 'success' &&
-            $session->confirmed_at == null &&
-            $session->confirmed_by == null
+            $session->status == 'success' &&
+            $session['original']['status'] != 'success' &&
+            $session->account->isConfirmed()
         ) {
             $payment_type = PaymentType::where('label', 'session')->first(); // referal account confirmation
             $payment = $payment_type->payment->where('country_id', $session->account->user->country_id)->first();

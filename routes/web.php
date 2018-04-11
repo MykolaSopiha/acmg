@@ -54,6 +54,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin:', 'namespace' => 'Admin', 'mi
         Route::get('/{id}/delete', ['uses' => 'UsersController@delete', 'as' => 'delete']);
         Route::get('/{id}/accounts', ['uses' => 'UsersController@userAccounts', 'as' => 'accounts']);
         Route::get('/{id}/wallet', ['uses' => 'UsersController@userWallet', 'as' => 'wallet']);
+        Route::get('/{id}/lock-wallet', ['uses' => 'UsersController@lockWallet', 'as' => 'lockWallet']);
+        Route::get('/{id}/unlock-wallet', ['uses' => 'UsersController@unlockWallet', 'as' => 'unlockWallet']);
     });
 
     Route::group(['prefix' => 'accounts', 'as' => 'accounts.'], function () {

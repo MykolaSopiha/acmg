@@ -34,6 +34,7 @@
     <!-- Content BEGIN -->
     <div class="content-wrapper">
         <div class="container-fluid">
+            @include('admin.layouts.alerts')
             @yield('content')
         </div>
         <!-- /.container-fluid-->

@@ -23,13 +23,20 @@ class WithdrawController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::user()->wallet->locked == true){
+            return back()->with(['error' => 'Your wallet is locked!']);
+        }
+
         $walletBalance = Auth::user()->wallet->balance;
 
+        $minWithdraw = config('accounts.min_withdraw.' . Auth::user()->country->code);
+
         $this->validate($request, [
-            'amount' => 'required|numeric|min:1|max:' . $walletBalance,
+            'amount' => 'required|numeric|max:' . $walletBalance . (($minWithdraw) ? "|min:" . $minWithdraw : ""),
             'card_number' => 'required|numeric|digits:16',
         ], [
             'max' => 'Вы можете заказать снятие средств на сумму не большье ' . $walletBalance . ' ' . Auth::user()->wallet->currency->code . '.',
+            'min' => 'Вы можете заказать снятие средств на сумму не меньше ' . $minWithdraw . ' ' . Auth::user()->wallet->currency->code . '.',
         ]);
 
 

@@ -24,7 +24,6 @@ class WithdrawController extends Controller
     public function confirm($id)
     {
         $withdraw = Withdraw::findOrFail($id)->confirm();
-
         return back()->with(['success' => 'Withdraw confirmed!']);
     }
 }

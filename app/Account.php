@@ -102,14 +102,14 @@ class Account extends Model
             'status' => 3,
         ]);
 
-        $payment_type = PaymentType::findOrFail(1); // account confirmation
+        $payment_type = PaymentType::where('label', 'valid')->first(); // account confirmation
         $payment = $payment_type->payment->where('country_id', $this->user->country_id)->first();
 
         $deposit = new Deposit();
         $deposit->fill([
             'wallet_id' => $this->user->wallet->id,
             'amount' => $payment['amount'],
-            'payment_type_id' => 1,
+            'payment_type_id' => $payment_type->id,
             'account_id' => $this->id,
             'available' => false,
         ]);
@@ -119,14 +119,14 @@ class Account extends Model
         if ($this->user->parent_id) {
             $perent = $this->user->getParent();
 
-            $payment_type = PaymentType::findOrFail(3); // referal account confirmation
+            $payment_type = PaymentType::where('label', 'referal')->first(); // referal account confirmation
             $payment = $payment_type->payment->where('country_id', $this->user->country_id)->first();
 
             $deposit = new Deposit();
             $deposit->fill([
                 'wallet_id' => $perent->wallet->id,
                 'amount' => $payment['amount'],
-                'payment_type_id' => 3,
+                'payment_type_id' => $payment_type->id,
                 'account_id' => $this->id,
                 'available' => false,
             ]);

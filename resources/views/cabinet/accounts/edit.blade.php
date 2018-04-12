@@ -65,9 +65,15 @@
                     </label>
 
                     @if($timetable->created_at != $timetable->updated_at)
-                        <span class="text-success">
-                            лимит изменений: {{ config('accounts.user_change_limit') - $timetable->user_changes }}
-                        </span>
+                        @if($timetable->user_changes >= config('accounts.user_change_limit'))
+                            <span class="text-danger">
+                                лимит изменений: {{ config('accounts.user_change_limit') - $timetable->user_changes }}
+                            </span>
+                        @else
+                            <span class="text-success">
+                                лимит изменений: {{ config('accounts.user_change_limit') - $timetable->user_changes }}
+                            </span>
+                        @endif
                     @endif
                 </div>
 

@@ -27,7 +27,7 @@ Route::get('home', function () {
     } elseif (Auth::user()->hasRole('manager')) {
         return redirect()->route('manager:dashboard');
     } elseif (Auth::user()->hasRole('user')) {
-        return redirect()->route('cabinet:dashboard');
+        return redirect()->route('cabinet:accounts.index');
     }
 
 });

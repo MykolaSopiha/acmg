@@ -11,6 +11,19 @@
         @include('cabinet.layouts.sidebar')
         <!-- Navigation END-->
 
+        {{--<ul class="navbar-nav ml-auto">--}}
+            {{--<li class="nav-item dropdown">--}}
+                {{--<a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                    {{--<i class="fa fa-question-circle-o" aria-hidden="true"></i>--}}
+                {{--</a>--}}
+                {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">--}}
+                    {{--<a class="dropdown-item small text-primary" href="{{ route('cabinet:docs.start') }}">Быстрый старт</a>--}}
+                    {{--<div class="dropdown-divider"></div>--}}
+                    {{--<a class="dropdown-item small text-primary" href="{{ route('cabinet:docs.faq') }}">FAQ</a>--}}
+                {{--</div>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+
         <ul class="navbar-nav ml-auto d-flex flex-row justify-content-around">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('cabinet:user.view')}}">

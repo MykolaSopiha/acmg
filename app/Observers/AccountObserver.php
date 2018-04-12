@@ -40,8 +40,6 @@ class AccountObserver
 
     public function updating(Account $account)
     {
-        $new_account = $account->getDirty();
-
         Artisan::call('update:hourly');
     }
 }

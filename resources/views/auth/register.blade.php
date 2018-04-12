@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('timezone') ? ' has-error' : '' }}">
-                                            <label for="timezone">Временная зона</label>
+                                            <label for="timezone">Часовой пояс</label>
                                             <select id="timezone" class="form-control js-select" name="timezone"
                                                     data-placeholder="Выберите временную зону">
                                                 <option value=""></option>

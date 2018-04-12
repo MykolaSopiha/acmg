@@ -61,14 +61,10 @@ class HourlyUpdate extends Command
             }
         }
 
-        echo 'hi1';
-
         $trashSessions = Session::where([
             ['created_at', '<', Carbon::now()->subHours(24)],
             ['status', 'expect'],
         ])->update(['status' => 'trash']);
-
-        echo 'hi2';
 
         $expectedSessions = Session::where('status', 'expect')->get();
         foreach ($expectedSessions as $session) {
@@ -76,7 +72,5 @@ class HourlyUpdate extends Command
                 $session->update(['status' => 'trash']);
             }
         }
-
-        echo 'hi3';
     }
 }

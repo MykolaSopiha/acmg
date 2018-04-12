@@ -15,6 +15,17 @@ class DashboardController extends Controller
         $referals = Auth::user()->getReferals()->count();
         $withdraw = Auth::user()->wallet->getWithdrawnMoney();
         $balance = Auth::user()->wallet->getBalanceMoney();
-        return view('cabinet.dashboard', compact('accounts', 'withdraw', 'balance', 'referals'));
+
+        $user = Auth::user();
+        $accounts = Account::where('user_id', Auth::user()->id)->get();
+
+        return view('cabinet.dashboard',
+            compact('accounts',
+                'withdraw',
+                'balance',
+                'referals',
+                'user',
+                'accounts'
+            ));
     }
 }

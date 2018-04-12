@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Wallet');
     }
 
+    public function withdraw()
+    {
+        return $this->hasManyThrough('App\Withdraw','App\Wallet','user_id', 'wallet_id', 'id');
+    }
+
     public function inspector()
     {
         return $this->belongsTo('App\Account', 'id', 'confirmed_by');
